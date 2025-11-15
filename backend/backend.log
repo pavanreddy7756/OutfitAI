@@ -1,0 +1,21 @@
+/Users/pavanreddy/Library/Python/3.9/lib/python/site-packages/google/api_core/_python_version_support.py:252: FutureWarning: You are using a Python version (3.9.6) past its end of life. Google will update google.api_core with critical bug fixes on a best-effort basis, but not with any other fixes or features. Please upgrade to the latest Python version, or at least Python 3.10, and then update google.api_core.
+  warnings.warn(message, FutureWarning)
+/Users/pavanreddy/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+INFO:     Started server process [40029]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+An error occurred: module 'importlib.metadata' has no attribute 'packages_distributions'
+INFO:     192.168.1.4:60120 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:60120 - "GET /uploads/1_0fd6a685-a19a-4226-a197-74d009c4bf78.jpg HTTP/1.1" 304 Not Modified
+INFO:     192.168.1.4:60121 - "GET /uploads/1_4a47dc6e-42fb-4345-81ff-1ad05258d957.jpg HTTP/1.1" 304 Not Modified
+INFO:     192.168.1.4:60120 - "GET /uploads/1_f09bd4e4-a54f-4e70-99b5-e0757f4b3626.jpg HTTP/1.1" 304 Not Modified
+INFO:     192.168.1.4:60122 - "GET /uploads/1_b5a31f29-5852-4656-addc-a08e5136dde1.jpg HTTP/1.1" 304 Not Modified
+INFO:     192.168.1.4:60123 - "GET /uploads/1_cec4e668-de1f-4931-b2dd-12aa07dd2a1e.jpg HTTP/1.1" 304 Not Modified
+INFO:     192.168.1.4:60121 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:60120 - "GET /api/outfits/ HTTP/1.1" 200 OK
+INFO:     192.168.1.4:60124 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     192.168.1.4:60124 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:60126 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:60124 - "GET /api/outfits/ HTTP/1.1" 200 OK
