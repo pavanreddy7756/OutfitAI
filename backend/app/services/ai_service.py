@@ -5,7 +5,10 @@ import os
 from pathlib import Path
 
 # Configure Gemini API
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "AIzaSyAmzS8-Y3clGTJpIYjXOSRETi1qCr25vSU")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+if not GEMINI_API_KEY:
+    raise ValueError("GEMINI_API_KEY environment variable not set.")
+
 genai.configure(api_key=GEMINI_API_KEY)
 
 
