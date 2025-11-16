@@ -2,20 +2,156 @@
   warnings.warn(message, FutureWarning)
 /Users/pavanreddy/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
   warnings.warn(
-INFO:     Started server process [40029]
+INFO:     Started server process [77972]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
 An error occurred: module 'importlib.metadata' has no attribute 'packages_distributions'
-INFO:     192.168.1.4:60120 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:60120 - "GET /uploads/1_0fd6a685-a19a-4226-a197-74d009c4bf78.jpg HTTP/1.1" 304 Not Modified
-INFO:     192.168.1.4:60121 - "GET /uploads/1_4a47dc6e-42fb-4345-81ff-1ad05258d957.jpg HTTP/1.1" 304 Not Modified
-INFO:     192.168.1.4:60120 - "GET /uploads/1_f09bd4e4-a54f-4e70-99b5-e0757f4b3626.jpg HTTP/1.1" 304 Not Modified
-INFO:     192.168.1.4:60122 - "GET /uploads/1_b5a31f29-5852-4656-addc-a08e5136dde1.jpg HTTP/1.1" 304 Not Modified
-INFO:     192.168.1.4:60123 - "GET /uploads/1_cec4e668-de1f-4931-b2dd-12aa07dd2a1e.jpg HTTP/1.1" 304 Not Modified
-INFO:     192.168.1.4:60121 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:60120 - "GET /api/outfits/ HTTP/1.1" 200 OK
-INFO:     192.168.1.4:60124 - "POST /api/auth/login HTTP/1.1" 200 OK
-INFO:     192.168.1.4:60124 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:60126 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:60124 - "GET /api/outfits/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61718 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61718 - "GET /api/outfits/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61719 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61720 - "GET /api/favorites/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61722 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61721 - "GET /api/favorites/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61724 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61723 - "GET /api/outfits/ HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61725 - "GET /api/favorites/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61727 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61726 - "GET /api/favorites/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61726 - "GET /api/clothing/items HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61727 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61726 - "GET /api/outfits/ HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61729 - "GET /api/favorites/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61727 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61726 - "GET /api/favorites/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61736 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61736 - "GET /api/outfits/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61737 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61738 - "GET /api/favorites/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61737 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61736 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61736 - "DELETE /api/favorites/6 HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61736 - "DELETE /api/favorites/5 HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61736 - "DELETE /api/favorites/4 HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61739 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61736 - "GET /api/outfits/ HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61740 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61736 - "PUT /api/outfits/2/favorite?combination_index=0 HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61736 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61736 - "PUT /api/outfits/2/favorite?combination_index=1 HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61736 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61736 - "PUT /api/outfits/2/favorite?combination_index=2 HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61736 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61736 - "GET /api/favorites/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61741 - "GET /api/clothing/items HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61744 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61743 - "GET /api/outfits/ HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61745 - "GET /api/favorites/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61747 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61746 - "GET /api/favorites/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61746 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61746 - "GET /api/favorites/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61750 - "GET /api/clothing/items HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61750 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61746 - "GET /api/outfits/ HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61751 - "GET /api/favorites/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61746 - "GET /api/clothing/items HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61750 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61751 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61746 - "GET /api/outfits/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61750 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61746 - "GET /api/favorites/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61750 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61746 - "GET /api/outfits/ HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61751 - "GET /api/favorites/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61746 - "GET /api/clothing/items HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61750 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61751 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61746 - "GET /api/outfits/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61833 - "GET /api/clothing/items HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61835 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61834 - "GET /api/outfits/ HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61836 - "GET /api/favorites/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61838 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61837 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61838 - "GET /uploads/1_20251115_235308.jpg HTTP/1.1" 304 Not Modified
+INFO:     192.168.1.4:61837 - "GET /uploads/1_20251115_235450.jpg HTTP/1.1" 304 Not Modified
+INFO:     192.168.1.4:61839 - "GET /uploads/1_20251115_235355.jpg HTTP/1.1" 304 Not Modified
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61837 - "GET /api/clothing/items HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61838 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61839 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61837 - "GET /api/outfits/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61838 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61837 - "GET /api/favorites/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61838 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61839 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61837 - "GET /api/outfits/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61837 - "GET /api/clothing/items HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61838 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61839 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61837 - "GET /api/outfits/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61838 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61837 - "GET /api/favorites/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61838 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61839 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61837 - "GET /api/outfits/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61837 - "GET /api/clothing/items HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61838 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61839 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61837 - "GET /api/outfits/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61838 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61837 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61837 - "GET /uploads/1_20251116_020711.jpg HTTP/1.1" 304 Not Modified
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61838 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61839 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61837 - "GET /api/outfits/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61837 - "GET /api/clothing/items HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61838 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61839 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61837 - "GET /api/outfits/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61838 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.4:61837 - "GET /api/favorites/ HTTP/1.1" 200 OK
+[Auth] User 1 authenticated successfully
+INFO:     192.168.1.4:61837 - "GET /api/clothing/items HTTP/1.1" 200 OK

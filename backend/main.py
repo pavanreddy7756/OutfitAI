@@ -4,7 +4,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from app.database import Base, engine
-from app.routes import auth, clothing, outfit
+from app.routes import auth, clothing, outfit, favorites
 
 # Create tables
 Base.metadata.create_all(bind=engine)
@@ -37,6 +37,7 @@ app.mount("/uploads", StaticFiles(directory=str(UPLOADS_DIR)), name="uploads")
 app.include_router(auth.router)
 app.include_router(clothing.router)
 app.include_router(outfit.router)
+app.include_router(favorites.router)
 
 @app.get("/")
 def read_root():

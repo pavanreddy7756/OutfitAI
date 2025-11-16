@@ -36,3 +36,14 @@ def decode_access_token(token: str) -> dict:
         return payload
     except jwt.InvalidTokenError:
         return None
+
+def get_user_id_from_token(token: str) -> Optional[int]:
+    """Extract user ID from JWT token"""
+    try:
+        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
+        user_id = payload.get("sub")
+        if user_id:
+            return int(user_id)
+        return None
+    except (jwt.InvalidTokenError, ValueError, KeyError):
+        return None

@@ -23,13 +23,17 @@ class ClothingItemResponse(ClothingItemBase):
         from_attributes = True
 
 class OutfitItemResponse(BaseModel):
-    clothing_item: ClothingItemResponse
+    id: int
+    outfit_id: int
+    clothing_item_id: int
+    
+    class Config:
+        from_attributes = True
 
 class OutfitBase(BaseModel):
     occasion: str
     season: Optional[str] = None
     weather: Optional[str] = None
-    description: Optional[str] = None
 
 class OutfitCreate(OutfitBase):
     clothing_item_ids: List[int]
@@ -38,7 +42,8 @@ class OutfitResponse(OutfitBase):
     id: int
     user_id: int
     ai_suggestions: str
-    is_favorite: int
+    favorite: int
+    favorite_combinations: Optional[str] = None
     created_at: datetime
     outfit_items: List[OutfitItemResponse]
 
