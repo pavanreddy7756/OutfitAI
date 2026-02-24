@@ -7,13 +7,15 @@ from typing import List, Dict, Optional, Set
 # Category mappings
 BASE_TOP_CATEGORIES = {
     'shirt', 't-shirt', 'tshirt', 'tee', 'polo', 'blouse', 
-    'knit', 'sweater', 'tank', 'top', 'henley'
+    'tank', 'top', 'henley', 'crop-top', 'camisole'
 }
 
 LAYER_CATEGORIES = {
     'jacket', 'blazer', 'coat', 'cardigan', 'overshirt', 
     'hoodie', 'vest', 'bomber', 'denim jacket', 'leather jacket',
-    'windbreaker', 'puffer', 'trench', 'peacoat'
+    'windbreaker', 'puffer', 'trench', 'peacoat',
+    'sweater', 'knit', 'pullover', 'sweatshirt', 'fleece',
+    'shacket', 'poncho', 'cape'
 }
 
 BOTTOM_CATEGORIES = {
@@ -288,15 +290,20 @@ def validate_outfit_combination(items: List[Dict]) -> tuple[bool, Optional[str]]
         return False, "No items provided"
     
     # Check slot distribution - prevent duplicate tops/bottoms/shoes
+    slot_counts = {}
     slots = {}
     for item in items:
         slot = categorize_item(item)
-        if slot in slots:
-            # Allow duplicate accessories, but nothing else
-            if slot != 'accessory':
-                # This is a styling error - can't have 2 shirts, 2 pants, etc.
-                return False, f"Fashion error: Cannot combine two {slot}s in one outfit (that's not how styling works!)"
+        slot_counts[slot] = slot_counts.get(slot, 0) + 1
         slots[slot] = item
+    
+    # Only block true duplicates - 2 base tops or 2 bottoms or 2 shoes
+    # Allow multiple layers (jacket + sweater) and multiple accessories
+    for slot, count in slot_counts.items():
+        if count > 1 and slot in ('bottom', 'shoes'):
+            return False, f"Fashion error: Cannot combine two {slot}s in one outfit"
+        if count > 2 and slot == 'base_top':
+            return False, f"Fashion error: Too many base tops in one outfit"
     
     # Check we have minimum required pieces using the slots we built
     # Need at least one top (base_top OR layer), bottom, and shoes

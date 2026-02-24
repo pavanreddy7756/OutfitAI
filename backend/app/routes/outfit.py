@@ -126,7 +126,6 @@ def generate_outfit(
     
     # If preview_only, return suggestions without saving to database
     if preview_only:
-        from datetime import datetime
         # Create a temporary outfit object for response (not saved to DB)
         preview_outfit = Outfit(
             id=0,  # Temporary ID
