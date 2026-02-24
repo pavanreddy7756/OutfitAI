@@ -1,157 +1,581 @@
-/Users/pavanreddy/Library/Python/3.9/lib/python/site-packages/google/api_core/_python_version_support.py:252: FutureWarning: You are using a Python version (3.9.6) past its end of life. Google will update google.api_core with critical bug fixes on a best-effort basis, but not with any other fixes or features. Please upgrade to the latest Python version, or at least Python 3.10, and then update google.api_core.
+/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/google/api_core/_python_version_support.py:237: FutureWarning: You are using a non-supported Python version (3.9.6). Google will not post any further updates to google.api_core supporting this Python version. Please upgrade to the latest Python version, or at least Python 3.10, and then update google.api_core.
   warnings.warn(message, FutureWarning)
-/Users/pavanreddy/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
   warnings.warn(
-INFO:     Started server process [77972]
+An error occurred: module 'importlib.metadata' has no attribute 'packages_distributions'
+2026-02-19 09:29:23,006 - INFO - Starting Outfit AI API...
+2026-02-19 09:29:23,012 - INFO - Database tables initialized
+2026-02-19 09:29:23,012 - INFO - CORS configured for origins: ['*']
+INFO:     Started server process [96885]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-An error occurred: module 'importlib.metadata' has no attribute 'packages_distributions'
+INFO:     192.168.1.15:51706 - "POST /api/auth/login HTTP/1.1" 200 OK
 [Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61718 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61718 - "GET /api/outfits/ HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51706 - "GET /api/clothing/items?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51706 - "GET /uploads/1_20251118_024110.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51708 - "GET /uploads/1_20251118_024115.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51709 - "GET /uploads/1_20251118_024120.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51710 - "GET /uploads/1_20251118_024125.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51706 - "GET /uploads/1_20251118_024129.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51708 - "GET /uploads/1_20251118_024133.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51706 - "GET /uploads/1_20251118_024142.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51709 - "GET /uploads/1_20251118_024138.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51706 - "GET /uploads/1_20251118_024147.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51710 - "GET /uploads/1_20251118_024151.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51708 - "GET /uploads/1_20251118_024156.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51709 - "GET /uploads/1_20251118_024200.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51706 - "GET /uploads/1_20251118_024205.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51706 - "GET /uploads/1_20251118_024209.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51708 - "GET /uploads/1_20251118_024214.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51710 - "GET /uploads/1_20251118_024436.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51709 - "GET /uploads/1_20251118_024219.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51706 - "GET /uploads/1_20251118_024445.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51708 - "GET /uploads/1_20251118_024441.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51709 - "GET /uploads/1_20251118_024449.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51706 - "GET /uploads/1_20251118_024454.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51708 - "GET /uploads/1_20251118_024458.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51710 - "GET /uploads/1_20251118_024502.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51709 - "GET /uploads/1_20251118_024507.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51706 - "GET /uploads/1_20251118_024511.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51708 - "GET /uploads/1_20251118_024515.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51709 - "GET /uploads/1_20251118_024521.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51710 - "GET /uploads/1_20251118_024529.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51706 - "GET /uploads/1_20251118_024533.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51708 - "GET /uploads/1_20251118_024537.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51709 - "GET /uploads/1_20251118_024546.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51710 - "GET /uploads/1_20251118_024542.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51706 - "GET /uploads/1_20251118_024551.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51708 - "GET /uploads/1_20251118_024556.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51709 - "GET /uploads/1_20251118_024606.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51710 - "GET /uploads/1_20251118_024601.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51708 - "GET /uploads/1_20251118_024610.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51709 - "GET /uploads/1_20251118_024614.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51710 - "GET /uploads/1_20251118_024619.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51706 - "GET /uploads/1_20251118_024623.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51709 - "GET /uploads/1_20251118_024632.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51708 - "GET /uploads/1_20251118_024628.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51710 - "GET /uploads/1_20251118_024636.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51706 - "GET /uploads/1_20251118_024641.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51708 - "GET /uploads/1_20251118_024645.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51710 - "GET /uploads/1_20251118_024654.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51709 - "GET /uploads/1_20251118_024650.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51706 - "GET /uploads/1_20251118_024705.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "POST /api/auth/login HTTP/1.1" 200 OK
 [Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61719 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61720 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /api/clothing/items?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024110.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024115.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024120.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_024125.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024129.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024133.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024138.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024142.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_024147.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024151.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024156.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024200.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_024205.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024209.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024214.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024219.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_024436.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024449.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024445.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_024454.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024441.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024502.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024458.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024507.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_024511.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024515.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024521.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_024529.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024533.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024537.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_024551.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024556.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51734 - "GET /uploads/1_20251118_024542.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51735 - "GET /uploads/1_20251118_024546.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024601.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024606.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024610.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024614.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_024619.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024623.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024628.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024632.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_024636.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024641.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024645.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024650.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_024654.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024705.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_025127.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_025123.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_025115.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_025119.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_025203.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_025425.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_025429.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51734 - "GET /uploads/1_20251118_025437.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51735 - "GET /uploads/1_20251118_025441.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_025433.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_025445.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_025449.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51734 - "GET /uploads/1_20251118_025453.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51735 - "GET /uploads/1_20251118_025501.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_025457.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_025506.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51735 - "GET /uploads/1_20251118_024133.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51734 - "GET /uploads/1_20251118_024129.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_024125.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024110.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024115.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024120.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024138.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024142.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024147.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51735 - "GET /uploads/1_20251118_024156.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_024151.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51734 - "GET /uploads/1_20251118_024200.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024205.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024209.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /api/outfits/?page_size=500 HTTP/1.1" 200 OK
 [Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61722 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61721 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /api/clothing/items?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51735 - "GET /api/favorites/?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024214.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024219.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51734 - "GET /uploads/1_20251118_024436.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51735 - "GET /uploads/1_20251118_024445.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024441.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_024449.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024454.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024458.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51734 - "GET /uploads/1_20251118_024502.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51735 - "GET /uploads/1_20251118_024507.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024511.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_024515.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024521.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024529.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51735 - "GET /uploads/1_20251118_024533.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024537.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_024542.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024551.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024556.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51734 - "GET /uploads/1_20251118_024601.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51735 - "GET /uploads/1_20251118_024606.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024610.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_024614.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024619.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51734 - "GET /uploads/1_20251118_024623.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024636.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_024641.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024628.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51735 - "GET /uploads/1_20251118_024632.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024645.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51734 - "GET /uploads/1_20251118_024650.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_024654.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024806.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024851.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51735 - "GET /uploads/1_20251118_024851.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024851.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51734 - "GET /uploads/1_20251118_024810.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_025115.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024151.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024851.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_024142.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51735 - "GET /uploads/1_20251118_024801.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_025115.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024110.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_025433.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51734 - "GET /uploads/1_20251118_024529.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_024801.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51735 - "GET /uploads/1_20251118_025115.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024110.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024810.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_025115.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51734 - "GET /uploads/1_20251118_025501.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_025501.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51735 - "GET /uploads/1_20251118_024142.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024835.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_025203.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51734 - "GET /uploads/1_20251118_025127.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024913.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_024537.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51735 - "GET /uploads/1_20251118_025119.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024110.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51734 - "GET /uploads/1_20251118_025115.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024956.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024710.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51735 - "GET /uploads/1_20251118_025127.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_025457.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_025445.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51734 - "GET /uploads/1_20251118_025123.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_025119.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51735 - "GET /uploads/1_20251118_025429.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_025501.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024529.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51734 - "GET /uploads/1_20251118_024537.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_025123.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_024521.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51735 - "GET /uploads/1_20251118_024934.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_025506.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024835.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51734 - "GET /uploads/1_20251118_025127.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51735 - "GET /uploads/1_20251118_025119.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024537.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_025425.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_025506.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_025119.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51734 - "GET /uploads/1_20251118_024537.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_025457.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51735 - "GET /uploads/1_20251118_025123.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_025119.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024129.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024537.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024934.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51735 - "GET /uploads/1_20251118_025123.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_024922.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024710.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51734 - "GET /uploads/1_20251118_025437.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_025453.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024533.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51734 - "GET /uploads/1_20251118_025506.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51735 - "GET /uploads/1_20251118_025123.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51733 - "GET /uploads/1_20251118_024930.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024601.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024710.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51734 - "GET /uploads/1_20251118_025429.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_025437.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51730 - "GET /uploads/1_20251118_024133.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51732 - "GET /uploads/1_20251118_024205.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51731 - "GET /uploads/1_20251118_024735.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51736 - "GET /uploads/1_20251118_024142.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51737 - "GET /uploads/1_20251118_025123.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51738 - "GET /uploads/1_20251118_024806.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51739 - "GET /uploads/1_20251118_025115.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51740 - "GET /uploads/1_20251118_024930.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51741 - "GET /uploads/1_20251118_024851.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51742 - "GET /uploads/1_20251118_024110.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51743 - "GET /uploads/1_20251118_025127.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51740 - "GET /uploads/1_20251118_024133.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51745 - "GET /uploads/1_20251118_024110.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51746 - "GET /uploads/1_20251118_025127.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51744 - "GET /uploads/1_20251118_024851.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51740 - "GET /uploads/1_20251118_024735.jpg HTTP/1.1" 200 OK
+
+[AI Service] Generating outfits for: Party at raddison 
+[AI Service] Available items count: 104
+[AI Service] Item IDs available: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 79, 80, 81, 83, 84, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108]
+INFO:     192.168.1.15:51748 - "POST /api/outfits/generate HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+  File "/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+  File "/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/fastapi/applications.py", line 1134, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/starlette/middleware/cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 125, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 111, in app
+    response = await f(request)
+  File "/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 391, in app
+    raw_response = await run_endpoint_function(
+  File "/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/fastapi/routing.py", line 292, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+  File "/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/starlette/concurrency.py", line 38, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+  File "/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/anyio/to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+  File "/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/anyio/_backends/_asyncio.py", line 2485, in run_sync_in_worker_thread
+    return await future
+  File "/Users/pavanreddy/OutfitAI copy/backend/venv/lib/python3.9/site-packages/anyio/_backends/_asyncio.py", line 976, in run
+    result = context.run(func, *args)
+  File "/Users/pavanreddy/OutfitAI copy/backend/app/routes/outfit.py", line 175, in generate_outfit
+    shown_at=datetime.utcnow(),
+UnboundLocalError: local variable 'datetime' referenced before assignment
+INFO:     192.168.1.15:51754 - "GET /uploads/1_20251118_024533.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51755 - "GET /uploads/1_20251118_024529.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51756 - "GET /uploads/1_20251118_025501.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51757 - "GET /uploads/1_20251118_025429.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51758 - "GET /uploads/1_20251118_024710.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51759 - "GET /uploads/1_20251118_025437.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51764 - "GET /uploads/1_20251118_024710.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51760 - "GET /uploads/1_20251118_024533.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51762 - "GET /uploads/1_20251118_024529.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51763 - "GET /uploads/1_20251118_025429.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51761 - "GET /uploads/1_20251118_025501.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51765 - "GET /uploads/1_20251118_025437.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51765 - "GET /uploads/1_20251118_024529.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51762 - "GET /uploads/1_20251118_024205.jpg HTTP/1.1" 200 OK
 [Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61724 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61723 - "GET /api/outfits/ HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61725 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51761 - "GET /api/clothing/items?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51760 - "GET /api/favorites/?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51760 - "GET /uploads/1_20251118_024115.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51761 - "GET /uploads/1_20251118_024151.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51762 - "GET /uploads/1_20251118_024801.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51763 - "GET /uploads/1_20251118_025506.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51764 - "GET /uploads/1_20251118_024606.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51765 - "GET /uploads/1_20251118_024801.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51762 - "GET /uploads/1_20251118_024722.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51760 - "GET /uploads/1_20251118_024537.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51763 - "GET /uploads/1_20251118_025119.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51761 - "GET /uploads/1_20251118_025119.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51764 - "GET /uploads/1_20251118_024831.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51765 - "GET /uploads/1_20251118_024537.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51761 - "GET /uploads/1_20251118_025457.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51764 - "GET /uploads/1_20251118_024922.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51762 - "GET /uploads/1_20251118_024645.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51760 - "GET /uploads/1_20251118_024819.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51763 - "GET /uploads/1_20251118_024819.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51761 - "GET /uploads/1_20251118_025453.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51765 - "GET /uploads/1_20251118_024801.jpg HTTP/1.1" 200 OK
 [Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61727 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61726 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51771 - "GET /api/clothing/items?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51771 - "GET /uploads/1_20251118_024120.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51772 - "GET /uploads/1_20251118_024125.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51773 - "GET /uploads/1_20251118_024129.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51774 - "GET /uploads/1_20251118_024138.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51775 - "GET /uploads/1_20251118_024147.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51776 - "GET /uploads/1_20251118_024156.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51771 - "GET /uploads/1_20251118_024200.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51771 - "GET /uploads/1_20251118_024209.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51773 - "GET /uploads/1_20251118_024214.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51772 - "GET /uploads/1_20251118_024219.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51774 - "GET /uploads/1_20251118_024436.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51775 - "GET /uploads/1_20251118_024445.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51771 - "GET /uploads/1_20251118_024441.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51776 - "GET /uploads/1_20251118_024449.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51771 - "GET /uploads/1_20251118_024454.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51772 - "GET /uploads/1_20251118_024502.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51773 - "GET /uploads/1_20251118_024458.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51774 - "GET /uploads/1_20251118_024507.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51775 - "GET /uploads/1_20251118_024511.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51776 - "GET /uploads/1_20251118_024515.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51774 - "GET /uploads/1_20251118_024521.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51771 - "GET /uploads/1_20251118_024542.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51772 - "GET /uploads/1_20251118_024551.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51773 - "GET /uploads/1_20251118_024546.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51775 - "GET /uploads/1_20251118_024556.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51776 - "GET /uploads/1_20251118_024601.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51771 - "GET /uploads/1_20251118_024610.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51774 - "GET /uploads/1_20251118_024614.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51772 - "GET /uploads/1_20251118_024619.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51773 - "GET /uploads/1_20251118_024623.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51771 - "GET /uploads/1_20251118_024628.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51776 - "GET /uploads/1_20251118_024632.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51775 - "GET /uploads/1_20251118_024636.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51774 - "GET /uploads/1_20251118_024641.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51776 - "GET /uploads/1_20251118_024654.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51772 - "GET /uploads/1_20251118_024650.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51773 - "GET /uploads/1_20251118_024705.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51771 - "GET /uploads/1_20251118_024110.jpg HTTP/1.1" 200 OK
+
+[AI Service] Generating outfits for: casual
+[AI Service] Available items count: 104
+[AI Service] Item IDs available: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 79, 80, 81, 83, 84, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108]
+INFO:     192.168.1.15:51772 - "POST /api/outfits/generate?preview_only=true HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51777 - "GET /uploads/1_20251118_024710.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51778 - "GET /uploads/1_20251118_024714.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51777 - "GET /uploads/1_20251118_024718.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51779 - "GET /uploads/1_20251118_024722.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51778 - "GET /uploads/1_20251118_024731.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51777 - "GET /uploads/1_20251118_024726.jpg HTTP/1.1" 200 OK
 [Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61726 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51778 - "GET /api/clothing/items?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51779 - "GET /api/favorites/?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51777 - "GET /api/outfits/?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51778 - "GET /uploads/1_20251118_025115.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51779 - "GET /uploads/1_20251118_025501.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51777 - "GET /uploads/1_20251118_024806.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51780 - "GET /uploads/1_20251118_024930.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51778 - "GET /uploads/1_20251118_024142.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51782 - "GET /uploads/1_20251118_025127.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51779 - "GET /uploads/1_20251118_025119.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51781 - "GET /uploads/1_20251118_025203.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51777 - "GET /uploads/1_20251118_024529.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51778 - "GET /uploads/1_20251118_025433.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51777 - "GET /uploads/1_20251118_024533.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51779 - "GET /uploads/1_20251118_025429.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51778 - "GET /uploads/1_20251118_025127.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51780 - "GET /uploads/1_20251118_025123.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51777 - "GET /uploads/1_20251118_025437.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51779 - "GET /uploads/1_20251118_025123.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51778 - "GET /uploads/1_20251118_024133.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51782 - "GET /uploads/1_20251118_024735.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51779 - "GET /uploads/1_20251118_024851.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51781 - "GET /uploads/1_20251118_025127.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51777 - "GET /uploads/1_20251118_024205.jpg HTTP/1.1" 200 OK
 [Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61727 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61726 - "GET /api/outfits/ HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61729 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51778 - "GET /api/clothing/items?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51777 - "GET /api/favorites/?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51777 - "GET /uploads/1_20251118_024115.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51778 - "GET /uploads/1_20251118_024930.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51779 - "GET /uploads/1_20251118_024851.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51780 - "GET /uploads/1_20251118_025115.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51782 - "GET /uploads/1_20251118_024801.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51781 - "GET /uploads/1_20251118_024151.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51778 - "GET /uploads/1_20251118_025123.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51780 - "GET /uploads/1_20251118_025506.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51779 - "GET /uploads/1_20251118_024801.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51777 - "GET /uploads/1_20251118_024606.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51782 - "GET /uploads/1_20251118_025115.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51778 - "GET /uploads/1_20251118_024722.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51781 - "GET /uploads/1_20251118_025429.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51780 - "GET /uploads/1_20251118_024537.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51779 - "GET /uploads/1_20251118_025119.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51782 - "GET /uploads/1_20251118_025501.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51777 - "GET /uploads/1_20251118_024142.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51778 - "GET /uploads/1_20251118_025119.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51781 - "GET /uploads/1_20251118_024529.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51779 - "GET /uploads/1_20251118_025429.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51782 - "GET /uploads/1_20251118_024831.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51777 - "GET /uploads/1_20251118_024537.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51780 - "GET /uploads/1_20251118_025123.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51781 - "GET /uploads/1_20251118_025457.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51778 - "GET /uploads/1_20251118_024710.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51779 - "GET /uploads/1_20251118_024922.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51782 - "GET /uploads/1_20251118_025123.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51780 - "GET /uploads/1_20251118_025501.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51777 - "GET /uploads/1_20251118_024142.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51781 - "GET /uploads/1_20251118_024930.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51779 - "GET /uploads/1_20251118_025437.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51778 - "GET /uploads/1_20251118_025123.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51782 - "GET /uploads/1_20251118_024645.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51780 - "GET /uploads/1_20251118_025115.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51777 - "GET /uploads/1_20251118_024819.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51782 - "GET /uploads/1_20251118_025123.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51779 - "GET /uploads/1_20251118_024710.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51780 - "GET /uploads/1_20251118_025453.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51781 - "GET /uploads/1_20251118_025501.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51778 - "GET /uploads/1_20251118_024819.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51777 - "GET /uploads/1_20251118_024142.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51780 - "GET /uploads/1_20251118_024645.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51782 - "GET /uploads/1_20251118_025429.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51778 - "GET /uploads/1_20251118_024806.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51779 - "GET /uploads/1_20251118_024819.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51781 - "GET /uploads/1_20251118_024705.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51777 - "GET /uploads/1_20251118_024138.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51777 - "GET /uploads/1_20251118_024810.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51778 - "GET /uploads/1_20251118_024815.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51777 - "GET /uploads/1_20251118_024823.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51783 - "GET /api/style-dna/profile HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51784 - "DELETE /api/style-dna/ HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51784 - "GET /api/style-dna/profile HTTP/1.1" 200 OK
+Face Analysis Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash
+Please retry in 40.875607292s. [links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerMinutePerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
+  quota_id: "GenerateContentInputTokensPerModelPerMinute-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+}
+, retry_delay {
+  seconds: 40
+}
+]
+INFO:     192.168.1.15:51785 - "POST /api/style-dna/analyze-face HTTP/1.1" 200 OK
 [Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61727 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61726 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51786 - "GET /api/favorites/?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51787 - "GET /api/clothing/items?page_size=500 HTTP/1.1" 200 OK
 [Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61736 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61736 - "GET /api/outfits/ HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51789 - "GET /api/clothing/items?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51791 - "GET /uploads/1_20251118_024735.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51792 - "GET /uploads/1_20251118_024740.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51791 - "GET /uploads/1_20251118_024744.jpg HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51792 - "GET /uploads/1_20251118_024749.jpg HTTP/1.1" 200 OK
 [Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61737 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61738 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51792 - "GET /api/clothing/items?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51793 - "GET /api/favorites/?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51791 - "GET /api/outfits/?page_size=500 HTTP/1.1" 200 OK
 [Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61737 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61736 - "GET /api/favorites/ HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61736 - "DELETE /api/favorites/6 HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61736 - "DELETE /api/favorites/5 HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61736 - "DELETE /api/favorites/4 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51792 - "GET /api/clothing/items?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51791 - "GET /api/favorites/?page_size=500 HTTP/1.1" 200 OK
 [Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61739 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61736 - "GET /api/outfits/ HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61740 - "GET /api/favorites/ HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61736 - "PUT /api/outfits/2/favorite?combination_index=0 HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61736 - "GET /api/favorites/ HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61736 - "PUT /api/outfits/2/favorite?combination_index=1 HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61736 - "GET /api/favorites/ HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61736 - "PUT /api/outfits/2/favorite?combination_index=2 HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61736 - "GET /api/favorites/ HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61736 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51791 - "GET /api/clothing/items?page_size=500 HTTP/1.1" 200 OK
 [Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61741 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51792 - "GET /api/clothing/items?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51793 - "GET /api/favorites/?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51791 - "GET /api/outfits/?page_size=500 HTTP/1.1" 200 OK
 [Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61744 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61743 - "GET /api/outfits/ HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61745 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51795 - "GET /api/clothing/items?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51796 - "GET /api/favorites/?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51794 - "GET /api/outfits/?page_size=500 HTTP/1.1" 200 OK
 [Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61747 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61746 - "GET /api/favorites/ HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51800 - "GET /api/clothing/items?page_size=500 HTTP/1.1" 200 OK
 [Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61746 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61746 - "GET /api/favorites/ HTTP/1.1" 200 OK
 [Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61750 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51813 - "GET /api/clothing/items?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51817 - "GET /api/clothing/items?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51814 - "GET /api/favorites/?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51816 - "GET /api/favorites/?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51812 - "GET /api/outfits/?page_size=500 HTTP/1.1" 200 OK
 [Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61750 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61746 - "GET /api/outfits/ HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61751 - "GET /api/favorites/ HTTP/1.1" 200 OK
-[Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61746 - "GET /api/clothing/items HTTP/1.1" 200 OK
-[Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61750 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61751 - "GET /api/favorites/ HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61746 - "GET /api/outfits/ HTTP/1.1" 200 OK
-[Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61750 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61746 - "GET /api/favorites/ HTTP/1.1" 200 OK
-[Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61750 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61746 - "GET /api/outfits/ HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61751 - "GET /api/favorites/ HTTP/1.1" 200 OK
-[Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61746 - "GET /api/clothing/items HTTP/1.1" 200 OK
-[Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61750 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61751 - "GET /api/favorites/ HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61746 - "GET /api/outfits/ HTTP/1.1" 200 OK
-[Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61833 - "GET /api/clothing/items HTTP/1.1" 200 OK
-[Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61835 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61834 - "GET /api/outfits/ HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61836 - "GET /api/favorites/ HTTP/1.1" 200 OK
-[Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61838 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61837 - "GET /api/favorites/ HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61838 - "GET /uploads/1_20251115_235308.jpg HTTP/1.1" 304 Not Modified
-INFO:     192.168.1.4:61837 - "GET /uploads/1_20251115_235450.jpg HTTP/1.1" 304 Not Modified
-INFO:     192.168.1.4:61839 - "GET /uploads/1_20251115_235355.jpg HTTP/1.1" 304 Not Modified
-[Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61837 - "GET /api/clothing/items HTTP/1.1" 200 OK
-[Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61838 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61839 - "GET /api/favorites/ HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61837 - "GET /api/outfits/ HTTP/1.1" 200 OK
-[Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61838 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61837 - "GET /api/favorites/ HTTP/1.1" 200 OK
-[Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61838 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61839 - "GET /api/favorites/ HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61837 - "GET /api/outfits/ HTTP/1.1" 200 OK
-[Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61837 - "GET /api/clothing/items HTTP/1.1" 200 OK
-[Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61838 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61839 - "GET /api/favorites/ HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61837 - "GET /api/outfits/ HTTP/1.1" 200 OK
-[Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61838 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61837 - "GET /api/favorites/ HTTP/1.1" 200 OK
-[Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61838 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61839 - "GET /api/favorites/ HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61837 - "GET /api/outfits/ HTTP/1.1" 200 OK
-[Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61837 - "GET /api/clothing/items HTTP/1.1" 200 OK
-[Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61838 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61839 - "GET /api/favorites/ HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61837 - "GET /api/outfits/ HTTP/1.1" 200 OK
-[Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61838 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61837 - "GET /api/favorites/ HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61837 - "GET /uploads/1_20251116_020711.jpg HTTP/1.1" 304 Not Modified
-[Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61838 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61839 - "GET /api/favorites/ HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61837 - "GET /api/outfits/ HTTP/1.1" 200 OK
-[Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61837 - "GET /api/clothing/items HTTP/1.1" 200 OK
-[Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61838 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61839 - "GET /api/favorites/ HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61837 - "GET /api/outfits/ HTTP/1.1" 200 OK
-[Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61838 - "GET /api/clothing/items HTTP/1.1" 200 OK
-INFO:     192.168.1.4:61837 - "GET /api/favorites/ HTTP/1.1" 200 OK
-[Auth] User 1 authenticated successfully
-INFO:     192.168.1.4:61837 - "GET /api/clothing/items HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51819 - "GET /api/clothing/items?page_size=500 HTTP/1.1" 200 OK
+INFO:     192.168.1.15:51818 - "GET /api/favorites/?page_size=500 HTTP/1.1" 200 OK

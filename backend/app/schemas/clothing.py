@@ -37,6 +37,17 @@ class OutfitBase(BaseModel):
 
 class OutfitCreate(OutfitBase):
     clothing_item_ids: List[int]
+    force_include_item_ids: Optional[List[int]] = None
+
+class SavePreviewOutfitRequest(BaseModel):
+    """Request to save and favorite a preview outfit"""
+    occasion: str
+    ai_suggestions: str
+    combination_index: int
+    clothing_item_ids: List[int]
+    season: Optional[str] = None
+    weather: Optional[str] = None
+
 
 class OutfitResponse(OutfitBase):
     id: int

@@ -4,26 +4,37 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from app.database import Base, engine
-from app.routes import auth, clothing, outfit, favorites
+from app.routes import auth, clothing, outfit, favorites, style_dna, wardrobe
+from app.config import settings
+from app.core.logging import logger
 
-# Create tables
+# Initialize logging
+logger.info("Starting Outfit AI API...")
+
+# Create tables (TODO: Replace with Alembic migrations)
 Base.metadata.create_all(bind=engine)
+logger.info("Database tables initialized")
 
 # Initialize FastAPI app
 app = FastAPI(
     title="Outfit AI API",
     description="AI-powered outfit suggestion app",
-    version="1.0.0"
+    version="1.0.0",
+    docs_url="/docs" if settings.ENVIRONMENT == "development" else None,
+    redoc_url="/redoc" if settings.ENVIRONMENT == "development" else None
 )
 
-# Add CORS middleware
+# Add CORS middleware with proper configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=settings.ALLOWED_ORIGINS,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type"],
+    max_age=600
 )
+
+logger.info(f"CORS configured for origins: {settings.ALLOWED_ORIGINS}")
 
 # Use absolute path for uploads directory
 BACKEND_DIR = Path(__file__).parent
@@ -38,6 +49,8 @@ app.include_router(auth.router)
 app.include_router(clothing.router)
 app.include_router(outfit.router)
 app.include_router(favorites.router)
+app.include_router(style_dna.router)
+app.include_router(wardrobe.router)
 
 @app.get("/")
 def read_root():

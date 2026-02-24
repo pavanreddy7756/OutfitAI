@@ -1,5 +1,5 @@
 import json
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
@@ -9,6 +9,7 @@ from app.models.clothing import FavoriteOutfit
 from app.utils.auth import decode_access_token
 from pydantic import BaseModel
 from datetime import datetime
+from app.core.constants import DEFAULT_PAGE_SIZE, MAX_PAGE_SIZE
 
 router = APIRouter(prefix="/api/favorites", tags=["favorites"])
 security = HTTPBearer(auto_error=False)
@@ -78,12 +79,22 @@ def add_favorite(
 @router.get("/", response_model=List[FavoriteResponse])
 def get_favorites(
     current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    page: int = Query(1, ge=1, description="Page number (starts at 1)"),
+    page_size: int = Query(DEFAULT_PAGE_SIZE, ge=1, le=MAX_PAGE_SIZE, description="Items per page")
 ):
-    """Get all favorites for current user"""
-    favorites = db.query(FavoriteOutfit).filter(
-        FavoriteOutfit.user_id == current_user.id
-    ).order_by(FavoriteOutfit.created_at.desc()).all()
+    """Get all favorites for current user with pagination"""
+    # Calculate offset
+    offset = (page - 1) * page_size
+    
+    favorites = (
+        db.query(FavoriteOutfit)
+        .filter(FavoriteOutfit.user_id == current_user.id)
+        .order_by(FavoriteOutfit.created_at.desc())
+        .offset(offset)
+        .limit(page_size)
+        .all()
+    )
     
     return favorites
 

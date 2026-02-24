@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, DateTime, Text, Float
+from sqlalchemy import Column, Integer, String, DateTime, Text, Float, ForeignKey
+from sqlalchemy.orm import relationship
 from datetime import datetime
 from app.database import Base
 
@@ -11,8 +12,10 @@ class ClothingItem(Base):
     image_path = Column(String)
     
     # Basic attributes
-    category = Column(String)  # shirt, pants, dress, jacket, etc.
-    subcategory = Column(String)  # t-shirt, polo, dress-shirt, jeans, chino, etc.
+    category = Column(String)  # shirt, pants, dress, jacket, shoes, watch, bag, etc.
+    subcategory = Column(String)  # t-shirt, polo, dress-shirt, jeans, chino, sneakers, smartwatch, etc.
+    brand = Column(String)  # Nike, Adidas, Apple, Casio, Gucci, etc.
+    model = Column(String)  # Air Max 90, Samba, Apple Watch Series 9, etc.
     color = Column(String)  # primary color
     secondary_colors = Column(String)  # comma-separated
     
@@ -88,15 +91,22 @@ class Outfit(Base):
     ai_suggestions = Column(Text)
     favorite = Column(Integer, default=0)
     favorite_combinations = Column(Text)  # JSON array of favorite combination indices
+    last_shown = Column(DateTime, default=datetime.utcnow)  # Track when outfit was last shown for rotation
     created_at = Column(DateTime, default=datetime.utcnow)
+    
+    # Relationship to outfit items
+    outfit_items = relationship("OutfitItem", backref="outfit", lazy="select")
 
 
 class OutfitItem(Base):
     __tablename__ = "outfit_items"
 
     id = Column(Integer, primary_key=True, index=True)
-    outfit_id = Column(Integer)
-    clothing_item_id = Column(Integer)
+    outfit_id = Column(Integer, ForeignKey("outfits.id"))
+    clothing_item_id = Column(Integer, ForeignKey("clothing_items.id"))
+    
+    # Relationship to clothing item
+    clothing_item = relationship("ClothingItem", backref="outfit_items", lazy="select")
 
 
 class FavoriteOutfit(Base):
@@ -107,3 +117,48 @@ class FavoriteOutfit(Base):
     occasion = Column(String)
     combination_data = Column(Text)  # JSON with outfit_name, description, item_ids, styling_tips
     created_at = Column(DateTime, default=datetime.utcnow)
+
+
+class OutfitHistory(Base):
+    """Track every outfit combination shown to user for novelty scoring"""
+    __tablename__ = "outfit_history"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, index=True)
+    occasion = Column(String)
+    item_ids = Column(Text)  # JSON array of item IDs
+    outfit_name = Column(String)
+    score = Column(Float)  # Final calculated score
+    shown_at = Column(DateTime, default=datetime.utcnow, index=True)
+    was_favorited = Column(Integer, default=0)  # Track if user liked it
+    was_dismissed = Column(Integer, default=0)  # Track if user didn't like it
+
+
+class ItemUsageStats(Base):
+    """Track per-item usage frequency and metadata for coverage optimization"""
+    __tablename__ = "item_usage_stats"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, index=True)
+    item_id = Column(Integer, ForeignKey("clothing_items.id"), index=True)
+    
+    # Usage tracking
+    total_shown = Column(Integer, default=0)  # Times included in shown outfits
+    total_favorited = Column(Integer, default=0)  # Times in favorited outfits
+    last_shown_at = Column(DateTime)
+    first_shown_at = Column(DateTime)
+    
+    # Per-occasion tracking (JSON: {occasion: count})
+    occasion_counts = Column(Text, default='{}')
+    
+    # Failure tracking
+    validation_failures = Column(Integer, default=0)  # Times failed outfit validation
+    
+    # Computed metrics (updated periodically)
+    success_rate = Column(Float, default=0.0)  # favorited / total_shown
+    versatility_score = Column(Float, default=0.0)  # Distinct occasions used
+    
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    
+    # Relationship
+    clothing_item = relationship("ClothingItem", backref="usage_stats")

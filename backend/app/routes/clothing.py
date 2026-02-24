@@ -1,4 +1,4 @@
-from fastapi import APIRouter, UploadFile, File, Depends, HTTPException, Header
+from fastapi import APIRouter, UploadFile, File, Depends, HTTPException, Header, Query
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
 import shutil
@@ -8,6 +8,7 @@ from app.database import get_db
 from app.models.clothing import ClothingItem
 from app.services.ai_service import analyze_clothing_image
 from app.utils.auth import get_user_id_from_token
+from app.core.constants import DEFAULT_PAGE_SIZE, MAX_PAGE_SIZE
 
 router = APIRouter(prefix="/api/clothing", tags=["clothing"])
 security = HTTPBearer(auto_error=False)
@@ -64,6 +65,8 @@ async def upload_clothing(
             image_path=f"/uploads/{new_filename}",
             category=analysis_result.get("category"),
             subcategory=analysis_result.get("subcategory"),
+            brand=analysis_result.get("brand"),
+            model=analysis_result.get("model"),
             color=analysis_result.get("color"),
             secondary_colors=analysis_result.get("secondary_colors"),
             fit_type=analysis_result.get("fit_type"),
@@ -106,6 +109,8 @@ async def upload_clothing(
             "analysis": {
                 "category": clothing_item.category,
                 "subcategory": clothing_item.subcategory,
+                "brand": clothing_item.brand,
+                "model": clothing_item.model,
                 "color": clothing_item.color,
                 "fit_type": clothing_item.fit_type,
                 "fabric_type": clothing_item.fabric_type,
@@ -124,20 +129,41 @@ async def upload_clothing(
 @router.get("/items")
 async def get_clothing_items(
     user_id: int = Depends(get_current_user),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    page: int = Query(1, ge=1, description="Page number (starts at 1)"),
+    page_size: int = Query(DEFAULT_PAGE_SIZE, ge=1, le=MAX_PAGE_SIZE, description="Items per page")
 ):
-    """Get all clothing items for the current user with all attributes."""
-    items = db.query(ClothingItem).filter(ClothingItem.user_id == user_id).all()
+    """Get all clothing items for the current user with pagination."""
+    # Calculate offset
+    offset = (page - 1) * page_size
+    
+    # Get total count
+    total_count = db.query(ClothingItem).filter(ClothingItem.user_id == user_id).count()
+    
+    # Get paginated items
+    items = (
+        db.query(ClothingItem)
+        .filter(ClothingItem.user_id == user_id)
+        .offset(offset)
+        .limit(page_size)
+        .all()
+    )
     
     return {
         "success": True,
         "count": len(items),
+        "total": total_count,
+        "page": page,
+        "page_size": page_size,
+        "total_pages": (total_count + page_size - 1) // page_size,
         "items": [
             {
                 "id": item.id,
                 "image_path": item.image_path,
                 "category": item.category,
                 "subcategory": item.subcategory,
+                "brand": item.brand,
+                "model": item.model,
                 "color": item.color,
                 "secondary_colors": item.secondary_colors,
                 "fit_type": item.fit_type,
