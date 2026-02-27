@@ -229,6 +229,142 @@ async def delete_clothing_item(
     }
 
 
+@router.put("/{item_id}")
+async def update_clothing_item(
+    item_id: int,
+    updates: dict,
+    user_id: int = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """Update editable attributes of a clothing item (category, subcategory, color, etc.)."""
+    item = db.query(ClothingItem).filter(
+        ClothingItem.id == item_id,
+        ClothingItem.user_id == user_id
+    ).first()
+
+    if not item:
+        raise HTTPException(status_code=404, detail="Item not found")
+
+    # Whitelist of fields the user is allowed to edit
+    EDITABLE_FIELDS = {
+        "category", "subcategory", "color", "secondary_colors",
+        "fit_type", "silhouette", "sleeve_type", "sleeve_fit",
+        "neckline", "collar_type", "collar_closure",
+        "texture", "fabric_type", "fabric_weight",
+        "pattern", "pattern_description", "length",
+        "waist_type", "pant_type", "pant_fit", "pant_rise",
+        "occasion_tags", "style_tags", "season_tags",
+        "special_features", "brand", "model",
+    }
+
+    updated_fields = []
+    for field, value in updates.items():
+        if field in EDITABLE_FIELDS:
+            setattr(item, field, value)
+            updated_fields.append(field)
+
+    if not updated_fields:
+        raise HTTPException(status_code=400, detail="No valid fields to update")
+
+    item.updated_at = datetime.utcnow()
+    db.commit()
+    db.refresh(item)
+
+    return {
+        "success": True,
+        "message": f"Updated {len(updated_fields)} field(s)",
+        "updated_fields": updated_fields,
+        "item": {
+            "id": item.id,
+            "category": item.category,
+            "subcategory": item.subcategory,
+            "color": item.color,
+            "brand": item.brand,
+            "model": item.model,
+            "fit_type": item.fit_type,
+            "fabric_type": item.fabric_type,
+            "pattern": item.pattern,
+            "occasion_tags": item.occasion_tags,
+            "style_tags": item.style_tags,
+            "season_tags": item.season_tags,
+        }
+    }
+
+
+@router.get("/category-options")
+async def get_category_options(
+    user_id: int = Depends(get_current_user),
+):
+    """Return the valid category/subcategory options for the edit UI."""
+    return {
+        "categories": {
+            "tops": {
+                "label": "Tops",
+                "subcategories": [
+                    "t-shirt", "polo", "shirt", "dress shirt", "henley",
+                    "tank top", "blouse", "crop top", "camisole"
+                ]
+            },
+            "layers": {
+                "label": "Layers / Outerwear",
+                "subcategories": [
+                    "sweater", "hoodie", "cardigan", "sweatshirt", "pullover",
+                    "jacket", "blazer", "coat", "overshirt", "shacket",
+                    "bomber", "denim jacket", "leather jacket", "windbreaker",
+                    "puffer", "vest", "fleece", "trench", "peacoat", "poncho"
+                ]
+            },
+            "bottoms": {
+                "label": "Bottoms",
+                "subcategories": [
+                    "jeans", "chinos", "trousers", "joggers", "cargo pants",
+                    "shorts", "dress pants", "skirt", "leggings", "sweatpants"
+                ]
+            },
+            "full_body": {
+                "label": "Full Body",
+                "subcategories": ["dress", "jumpsuit", "romper", "suit"]
+            },
+            "shoes": {
+                "label": "Shoes",
+                "subcategories": [
+                    "sneakers", "boots", "loafers", "oxfords", "sandals",
+                    "slides", "heels", "flats", "running shoes", "chelsea boots",
+                    "trainers", "mules", "derbies"
+                ]
+            },
+            "accessories": {
+                "label": "Accessories",
+                "subcategories": [
+                    "watch", "necklace", "bracelet", "ring", "belt",
+                    "bag", "backpack", "hat", "cap", "beanie",
+                    "scarf", "sunglasses", "tie", "pocket square"
+                ]
+            }
+        },
+        "colors": [
+            "black", "white", "navy", "blue", "light blue", "grey", "charcoal",
+            "brown", "tan", "beige", "cream", "khaki", "olive", "green",
+            "red", "burgundy", "maroon", "pink", "coral", "orange", "yellow",
+            "purple", "lavender", "teal", "indigo", "multicolor"
+        ],
+        "fit_types": [
+            "slim", "regular", "relaxed", "oversized", "boxy",
+            "athletic", "tailored", "loose", "fitted", "cropped"
+        ],
+        "patterns": [
+            "solid", "striped", "plaid", "checkered", "floral",
+            "graphic", "geometric", "polka dot", "camo", "abstract",
+            "paisley", "herringbone", "houndstooth", "animal print", "tie-dye"
+        ],
+        "fabrics": [
+            "cotton", "polyester", "denim", "wool", "linen",
+            "silk", "nylon", "leather", "suede", "fleece",
+            "knit", "velvet", "corduroy", "satin", "canvas", "blend"
+        ]
+    }
+
+
 @router.post("/analyze-unanalyzed")
 async def analyze_unanalyzed(
     user_id: int = Depends(get_current_user),

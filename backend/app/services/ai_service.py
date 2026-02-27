@@ -46,7 +46,7 @@ def analyze_clothing_image(image_path: str) -> dict:
         # Encode to base64
         image_data = base64.standard_b64encode(image_bytes).decode("utf-8")
         
-        model = genai.GenerativeModel("gemini-2.5-flash")
+        model = genai.GenerativeModel("gemini-2.5-flash-lite")
         
         analysis_prompt = """Analyze this clothing/accessory/footwear item image in EXTREME DETAIL and return ONLY a valid JSON object (no markdown, no extra text).
 
@@ -674,7 +674,7 @@ Each outfit MUST have exactly these 4 fields: outfit_name, description, item_ids
 item_ids MUST be an array of numbers.
 Return ONLY the JSON array, no markdown, no code blocks, no explanation."""
 
-        model = genai.GenerativeModel("gemini-2.5-flash")
+        model = genai.GenerativeModel("gemini-2.5-flash-lite")
         response = model.generate_content(prompt)
         
         response_text = response.text.strip()

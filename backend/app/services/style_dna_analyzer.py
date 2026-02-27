@@ -41,7 +41,7 @@ def analyze_face_photo(image_path: str) -> dict:
         # Encode to base64
         image_data = base64.standard_b64encode(image_bytes).decode("utf-8")
         
-        model = genai.GenerativeModel("gemini-2.0-flash")
+        model = genai.GenerativeModel("gemini-2.5-flash-lite")
         
         analysis_prompt = """Analyze this face photo and provide a comprehensive skin tone and color analysis for fashion recommendations.
 
@@ -165,7 +165,7 @@ def analyze_body_photo(image_path: str) -> dict:
         
         image_data = base64.standard_b64encode(image_bytes).decode("utf-8")
         
-        model = genai.GenerativeModel("gemini-2.0-flash")
+        model = genai.GenerativeModel("gemini-2.5-flash-lite")
         
         analysis_prompt = """Analyze this full-body photo to determine body shape and provide personalized fit recommendations.
 
@@ -311,7 +311,7 @@ def analyze_style_inspiration(image_paths: list) -> dict:
                 "error": "No valid images found"
             }
         
-        model = genai.GenerativeModel("gemini-2.0-flash")
+        model = genai.GenerativeModel("gemini-2.5-flash-lite")
         
         analysis_prompt = f"""Analyze these {len(images_data)} outfit photos to extract the user's style preferences and patterns.
 
