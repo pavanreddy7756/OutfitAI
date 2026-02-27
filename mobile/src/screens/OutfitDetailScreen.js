@@ -191,20 +191,20 @@ export function OutfitDetailScreen() {
           onPress={() => navigation.goBack()}
           style={styles.headerButton}
         >
-          <Text style={styles.backIcon}>‹</Text>
+          <Ionicons name="chevron-back" size={28} color="#007AFF" />
         </TouchableOpacity>
         <View style={styles.headerActions}>
           <TouchableOpacity 
             onPress={handleToggleFavorite}
             style={styles.headerButton}
           >
-            <Ionicons name={isFavorite ? 'heart' : 'heart-outline'} size={24} color={isFavorite ? '#FF3B30' : '#8E8E93'} />
+            <Ionicons name={isFavorite ? 'heart' : 'heart-outline'} size={26} color={isFavorite ? '#FF2D55' : '#8E8E93'} />
           </TouchableOpacity>
           <TouchableOpacity 
             onPress={handleShare}
             style={styles.headerButton}
           >
-            <Text style={styles.shareIcon}>↗</Text>
+            <Ionicons name="share-outline" size={22} color="#007AFF" />
           </TouchableOpacity>
         </View>
       </View>
@@ -250,7 +250,7 @@ export function OutfitDetailScreen() {
           {outfitItems.map((item, idx) => (
             <View key={idx} style={styles.itemRow}>
               <View style={styles.itemLeft}>
-                <Text style={styles.itemIcon}>{getCategoryIcon(item.category)}</Text>
+                <Ionicons name={getCategoryIcon(item.category)} size={20} color="#8E8E93" />
                 <View style={styles.itemTextContainer}>
                   <Text style={styles.itemName}>
                     {item.brand ? `${item.brand} ${item.model || ''}`.trim() : item.category}
@@ -293,7 +293,7 @@ export function OutfitDetailScreen() {
         <View style={styles.tipsSection}>
           <Text style={styles.sectionTitle}>Styling Tips</Text>
           <View style={styles.tipCard}>
-            <Text style={styles.tipIcon}>💡</Text>
+            <Ionicons name="bulb-outline" size={18} color="#FF9500" style={{ marginRight: 6 }} />
             <Text style={styles.tipText}>{outfit.styling_tips}</Text>
           </View>
         </View>
@@ -317,7 +317,7 @@ export function OutfitDetailScreen() {
             activeOpacity={0.9}
           >
             <View style={styles.closeButtonCircle}>
-              <Text style={styles.modalCloseText}>✕</Text>
+              <Ionicons name="close" size={20} color="#FFFFFF" />
             </View>
           </TouchableOpacity>
 

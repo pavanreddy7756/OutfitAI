@@ -111,7 +111,10 @@ export const StyleDNABodyUploadScreen = ({ navigation }) => {
         contentContainerStyle={styles.contentContainer}
         showsVerticalScrollIndicator={false}
       >
-        <Text style={styles.title}>👗 Full Body Photo</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Ionicons name="body-outline" size={22} color="#5856D6" style={{ marginRight: 8 }} />
+          <Text style={styles.title}>Full Body Photo</Text>
+        </View>
         <Text style={styles.description}>
           We'll analyze your body shape to recommend the best fits
         </Text>
@@ -122,7 +125,7 @@ export const StyleDNABodyUploadScreen = ({ navigation }) => {
             <Image source={{ uri: selectedImage }} style={styles.photoPreview} />
           ) : (
             <View style={styles.photoPlaceholder}>
-              <Text style={styles.silhouetteText}>🧍</Text>
+              <Ionicons name="person-outline" size={80} color="#C7C7CC" />
               <Text style={styles.placeholderHint}>Stand naturally</Text>
             </View>
           )}
@@ -130,7 +133,10 @@ export const StyleDNABodyUploadScreen = ({ navigation }) => {
 
         {/* Tips */}
         <View style={styles.tipsContainer}>
-          <Text style={styles.tipsTitle}>💡 For accurate analysis:</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Ionicons name="bulb-outline" size={18} color="#FF9500" style={{ marginRight: 6 }} />
+            <Text style={styles.tipsTitle}>For accurate analysis:</Text>
+          </View>
           <View style={styles.tipRow}>
             <Ionicons name="checkmark-circle-outline" size={20} color="#34C759" />
             <Text style={styles.tipText}>Wear fitted clothing</Text>

@@ -49,7 +49,7 @@ export const StyleDNAFaceResultsScreen = ({ route, navigation }) => {
           <View style={styles.successIcon}>
             <Ionicons name="checkmark" size={40} color="#34C759" />
           </View>
-          <Text style={styles.successTitle}>✨ Analysis Complete!</Text>
+          <Text style={styles.successTitle}>Analysis Complete!</Text>
         </View>
 
         {/* Photo preview */}
@@ -87,7 +87,10 @@ export const StyleDNAFaceResultsScreen = ({ route, navigation }) => {
         {/* Best Colors */}
         {analysis.best_colors && analysis.best_colors.length > 0 && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>✨ Best Colors for You</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Ionicons name="sparkles" size={18} color="#FF9500" style={{ marginRight: 6 }} />
+              <Text style={styles.sectionTitle}>Best Colors for You</Text>
+            </View>
             {renderColorPalette(analysis.best_colors)}
           </View>
         )}
@@ -95,7 +98,10 @@ export const StyleDNAFaceResultsScreen = ({ route, navigation }) => {
         {/* Colors to Avoid */}
         {analysis.avoid_colors && analysis.avoid_colors.length > 0 && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>⚠️ Colors to Avoid</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Ionicons name="alert-circle-outline" size={18} color="#FF3B30" style={{ marginRight: 6 }} />
+              <Text style={styles.sectionTitle}>Colors to Avoid</Text>
+            </View>
             {renderColorPalette(analysis.avoid_colors)}
           </View>
         )}
@@ -103,7 +109,10 @@ export const StyleDNAFaceResultsScreen = ({ route, navigation }) => {
         {/* Analysis Notes */}
         {analysis.analysis_notes && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>💡 Why These Colors Work</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Ionicons name="bulb-outline" size={18} color="#FF9500" style={{ marginRight: 6 }} />
+              <Text style={styles.sectionTitle}>Why These Colors Work</Text>
+            </View>
             <View style={styles.notesCard}>
               <Text style={styles.notesText}>{analysis.analysis_notes}</Text>
             </View>

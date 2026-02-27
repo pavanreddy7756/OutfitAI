@@ -26,7 +26,7 @@ export const StyleDNACompleteScreen = ({ navigation }) => {
         {/* Success Animation/Icon */}
         <View style={styles.celebrationContainer}>
           <View style={styles.successIconLarge}>
-            <Text style={styles.celebrationEmoji}>🎉</Text>
+            <Ionicons name="checkmark-circle" size={64} color="#34C759" />
           </View>
           <Text style={styles.title}>Your Style DNA is Ready!</Text>
           <Text style={styles.subtitle}>

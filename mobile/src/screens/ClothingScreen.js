@@ -55,9 +55,9 @@ export function ClothingScreen() {
   const [isSaving, setIsSaving] = useState(false);
 
   const categories = [
-    { id: "clothing", label: "Clothing", icon: "👕" },
-    { id: "shoes", label: "Shoes", icon: "👟" },
-    { id: "accessories", label: "Accessories", icon: "👜" },
+    { id: "clothing", label: "Clothing", icon: "shirt-outline" },
+    { id: "shoes", label: "Shoes", icon: "footsteps-outline" },
+    { id: "accessories", label: "Accessories", icon: "watch-outline" },
   ];
 
   // Load clothes when screen comes into focus
@@ -521,7 +521,7 @@ export function ClothingScreen() {
             ]}
             onPress={() => setSelectedCategory(cat.id)}
           >
-            <Text style={styles.segmentEmoji}>{cat.icon}</Text>
+            <Ionicons name={cat.icon} size={15} color={selectedCategory === cat.id ? '#000000' : '#8E8E93'} style={{ marginRight: 4 }} />
             <Text
               style={[
                 styles.segmentText,
@@ -556,10 +556,11 @@ export function ClothingScreen() {
           contentContainerStyle={styles.listContainer}
           ListEmptyComponent={
             <View style={styles.emptyContainer}>
-              <Text style={styles.emptyEmoji}>
-                {selectedCategory === "clothing" ? "👕" :
-                  selectedCategory === "shoes" ? "👟" : "👜"}
-              </Text>
+              <Ionicons 
+                name={selectedCategory === "clothing" ? "shirt-outline" :
+                  selectedCategory === "shoes" ? "footsteps-outline" : "watch-outline"}
+                size={48} color="#C7C7CC" 
+              />
               <Text style={styles.emptyText}>
                 No {categories.find(c => c.id === selectedCategory)?.label.toLowerCase()} yet
               </Text>
@@ -583,7 +584,7 @@ export function ClothingScreen() {
                 style={styles.deleteButton}
                 onPress={() => deleteClothing(item.id)}
               >
-                <Text style={styles.deleteButtonText}>×</Text>
+                <Ionicons name="close" size={14} color="#FFFFFF" />
               </TouchableOpacity>
               <View style={styles.itemDetails}>
                 <Text style={styles.itemCategory} numberOfLines={1}>
@@ -688,7 +689,7 @@ export function ClothingScreen() {
                   activeOpacity={0.9}
                 >
                   <View style={styles.closeButtonCircle}>
-                    <Text style={styles.modalCloseText}>✕</Text>
+                    <Ionicons name="close" size={20} color="#FFFFFF" />
                   </View>
                 </TouchableOpacity>
               )}
@@ -1067,7 +1068,7 @@ export function ClothingScreen() {
                             }}
                             activeOpacity={0.7}
                           >
-                            <Ionicons name={favoritedOutfits[index] ? 'heart' : 'heart-outline'} size={18} color={favoritedOutfits[index] ? '#FF3B30' : 'rgba(255,255,255,0.6)'} />
+                            <Ionicons name={favoritedOutfits[index] ? 'heart' : 'heart-outline'} size={22} color={favoritedOutfits[index] ? '#FF2D55' : 'rgba(255,255,255,0.55)'} />
                           </TouchableOpacity>
                         </TouchableOpacity>
                       );

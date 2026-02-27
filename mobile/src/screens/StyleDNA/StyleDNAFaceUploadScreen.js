@@ -112,7 +112,10 @@ export const StyleDNAFaceUploadScreen = ({ navigation }) => {
         contentContainerStyle={styles.contentContainer}
         showsVerticalScrollIndicator={false}
       >
-        <Text style={styles.title}>📸 Your Best Face Photo</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Ionicons name="camera-outline" size={22} color="#007AFF" style={{ marginRight: 8 }} />
+          <Text style={styles.title}>Your Best Face Photo</Text>
+        </View>
         <Text style={styles.description}>
           We'll analyze your complexion to find your perfect colors
         </Text>
@@ -130,7 +133,10 @@ export const StyleDNAFaceUploadScreen = ({ navigation }) => {
 
         {/* Tips */}
         <View style={styles.tipsContainer}>
-          <Text style={styles.tipsTitle}>💡 Tips for best results:</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Ionicons name="bulb-outline" size={18} color="#FF9500" style={{ marginRight: 6 }} />
+            <Text style={styles.tipsTitle}>Tips for best results:</Text>
+          </View>
           <View style={styles.tipRow}>
             <Ionicons name="checkmark-circle-outline" size={20} color="#34C759" />
             <Text style={styles.tipText}>Good natural lighting</Text>

@@ -56,7 +56,7 @@ export const StyleDNABodyResultsScreen = ({ route, navigation }) => {
           <View style={styles.successIcon}>
             <Ionicons name="checkmark" size={40} color="#34C759" />
           </View>
-          <Text style={styles.successTitle}>✨ Body Analysis Complete!</Text>
+          <Text style={styles.successTitle}>Body Analysis Complete!</Text>
         </View>
 
         {/* Photo preview */}
@@ -89,7 +89,10 @@ export const StyleDNABodyResultsScreen = ({ route, navigation }) => {
         {/* Recommended Fits - Tops */}
         {analysis.recommended_fits && analysis.recommended_fits.tops && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>👕 Recommended Tops</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Ionicons name="shirt-outline" size={18} color="#007AFF" style={{ marginRight: 6 }} />
+              <Text style={styles.sectionTitle}>Recommended Tops</Text>
+            </View>
             {renderRecommendations(analysis.recommended_fits.tops)}
             
             {analysis.recommended_fits.tops.necklines && (
@@ -106,7 +109,10 @@ export const StyleDNABodyResultsScreen = ({ route, navigation }) => {
         {/* Recommended Fits - Bottoms */}
         {analysis.recommended_fits && analysis.recommended_fits.bottoms && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>👖 Recommended Bottoms</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Ionicons name="cut-outline" size={18} color="#5856D6" style={{ marginRight: 6 }} />
+              <Text style={styles.sectionTitle}>Recommended Bottoms</Text>
+            </View>
             {renderRecommendations(analysis.recommended_fits.bottoms)}
             
             {analysis.recommended_fits.bottoms.styles && (
@@ -123,7 +129,10 @@ export const StyleDNABodyResultsScreen = ({ route, navigation }) => {
         {/* Balance Tips */}
         {analysis.balance_tips && analysis.balance_tips.length > 0 && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>⚖️ Style Balance Tips</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Ionicons name="options-outline" size={18} color="#FF9500" style={{ marginRight: 6 }} />
+              <Text style={styles.sectionTitle}>Style Balance Tips</Text>
+            </View>
             <View style={styles.tipsCard}>
               {analysis.balance_tips.map((tip, index) => (
                 <View key={index} style={styles.balanceTipRow}>

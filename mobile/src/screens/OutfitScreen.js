@@ -78,12 +78,12 @@ export function OutfitScreen() {
   const [isGeneratingFromChip, setIsGeneratingFromChip] = useState(false);
 
   const OCCASIONS = [
-    { id: 'work', label: 'Work', emoji: '💼' },
-    { id: 'casual', label: 'Casual', emoji: '👕' },
-    { id: 'date', label: 'Date', emoji: '🥂' },
-    { id: 'formal', label: 'Formal', emoji: '🎩' },
-    { id: 'active', label: 'Active', emoji: '👟' },
-    { id: 'party', label: 'Party', emoji: '🎊' },
+    { id: 'work', label: 'Work', icon: 'briefcase-outline' },
+    { id: 'casual', label: 'Casual', icon: 'shirt-outline' },
+    { id: 'date', label: 'Date', icon: 'wine-outline' },
+    { id: 'formal', label: 'Formal', icon: 'diamond-outline' },
+    { id: 'active', label: 'Active', icon: 'fitness-outline' },
+    { id: 'party', label: 'Party', icon: 'sparkles-outline' },
   ];
 
   useFocusEffect(
@@ -361,7 +361,7 @@ export function OutfitScreen() {
             {loading && !isGeneratingFromChip ? (
               <ActivityIndicator color="#FFFFFF" size="small" />
             ) : (
-              <Text style={styles.customButtonIcon}>↑</Text>
+              <Ionicons name="arrow-up" size={18} color="#FFFFFF" />
             )}
           </TouchableOpacity>
         </View>
@@ -381,6 +381,7 @@ export function OutfitScreen() {
               key={occ.id}
               style={[
                 styles.occasionChip,
+                selectedOccasion === occ.id && styles.occasionChipSelected,
                 selectedOccasion === occ.id && loading && styles.occasionChipLoading,
               ]}
               onPress={() => handleOccasionSelect(occ.id)}
@@ -390,8 +391,8 @@ export function OutfitScreen() {
                 <ActivityIndicator size="small" color="#007AFF" />
               ) : (
                 <>
-                  <Text style={styles.chipEmoji}>{occ.emoji}</Text>
-                  <Text style={styles.chipLabel}>{occ.label}</Text>
+                  <Ionicons name={occ.icon} size={16} color={selectedOccasion === occ.id ? '#007AFF' : '#3C3C43'} />
+                  <Text style={[styles.chipLabel, selectedOccasion === occ.id && styles.chipLabelSelected]}>{occ.label}</Text>
                 </>
               )}
             </TouchableOpacity>
@@ -400,7 +401,7 @@ export function OutfitScreen() {
         
         {clothing.length === 0 && (
           <View style={styles.warningBanner}>
-            <Text style={styles.warningIcon}>⚠️</Text>
+            <Ionicons name="alert-circle" size={16} color="#FF9500" style={{ marginRight: 6 }} />
             <Text style={styles.warningText}>Add items to your wardrobe first</Text>
           </View>
         )}
@@ -541,7 +542,7 @@ export function OutfitScreen() {
                                   toggleFavorite(item.id, index);
                                 }}
                               >
-                                <Ionicons name={isFavorite ? 'heart' : 'heart-outline'} size={20} color={isFavorite ? '#FF3B30' : '#C7C7CC'} />
+                                <Ionicons name={isFavorite ? 'heart' : 'heart-outline'} size={22} color={isFavorite ? '#FF2D55' : '#C7C7CC'} />
                               </TouchableOpacity>
                             </View>
                             <Text style={styles.outfitDesc} numberOfLines={2}>
@@ -635,14 +636,17 @@ const styles = StyleSheet.create({
   occasionChip: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    borderRadius: 20,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 18,
     backgroundColor: '#F2F2F7',
     gap: 6,
     marginRight: 8,
     minWidth: 60,
     justifyContent: 'center',
+  },
+  occasionChipSelected: {
+    backgroundColor: 'rgba(0, 122, 255, 0.12)',
   },
   occasionChipLoading: {
     backgroundColor: '#F2F2F7',
@@ -651,12 +655,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   chipLabel: {
-    fontSize: 15,
+    fontSize: 14,
     fontWeight: '600',
-    color: '#000000',
+    color: '#3C3C43',
+    letterSpacing: -0.1,
   },
   chipLabelSelected: {
-    color: '#FFFFFF',
+    color: '#007AFF',
   },
   warningBanner: {
     marginTop: 12,

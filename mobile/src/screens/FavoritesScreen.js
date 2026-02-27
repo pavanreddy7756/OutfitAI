@@ -107,7 +107,7 @@ export const FavoritesScreen = () => {
             onPress={() => deleteFavorite(item.id)}
             style={styles.deleteButton}
           >
-            <Text style={styles.deleteIcon}>×</Text>
+            <Ionicons name="trash-outline" size={18} color="#8E8E93" />
           </TouchableOpacity>
         </View>
 
@@ -138,7 +138,7 @@ export const FavoritesScreen = () => {
         <View style={styles.outfitDetails}>
           <Text style={styles.description}>{item.combination.description}</Text>
           <View style={styles.tipContainer}>
-            <Text style={styles.tipIcon}>💡</Text>
+            <Ionicons name="bulb-outline" size={16} color="#FF9500" style={{ marginRight: 4 }} />
             <Text style={styles.styleTips}>
               {item.combination.styling_tips}
             </Text>
@@ -170,7 +170,7 @@ export const FavoritesScreen = () => {
   if (favoriteCombinations.length === 0) {
     return (
       <View style={styles.centerContainer}>
-        <Ionicons name="heart-outline" size={48} color="#C7C7CC" />
+        <Text style={styles.emptyIcon}>⭐</Text>
         <Text style={styles.emptySubtext}>No Favorites Yet</Text>
         <Text style={styles.emptyHint}>
           Save your favorite outfit combinations to see them here

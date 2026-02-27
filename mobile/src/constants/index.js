@@ -56,12 +56,12 @@ export const SPACING = {
 };
 
 export const OCCASIONS = [
-  { id: 'work', label: 'Work', emoji: '💼' },
-  { id: 'casual', label: 'Casual', emoji: '👕' },
-  { id: 'date', label: 'Date', emoji: '🥂' },
-  { id: 'formal', label: 'Formal', emoji: '🎩' },
-  { id: 'active', label: 'Active', emoji: '👟' },
-  { id: 'party', label: 'Party', emoji: '🎊' },
+  { id: 'work', label: 'Work', icon: 'briefcase-outline' },
+  { id: 'casual', label: 'Casual', icon: 'shirt-outline' },
+  { id: 'date', label: 'Date', icon: 'wine-outline' },
+  { id: 'formal', label: 'Formal', icon: 'diamond-outline' },
+  { id: 'active', label: 'Active', icon: 'fitness-outline' },
+  { id: 'party', label: 'Party', icon: 'sparkles-outline' },
 ];
 
 export const API_CONFIG = {

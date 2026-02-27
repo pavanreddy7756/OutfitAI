@@ -112,7 +112,7 @@ const StyleDNAScreen = ({ navigation }) => {
 
         <ScrollView contentContainerStyle={styles.emptyContent}>
           <View style={styles.emptyIcon}>
-            <Text style={styles.emptyEmoji}>✨</Text>
+            <Ionicons name="sparkles" size={48} color="#FF9500" />
           </View>
           <Text style={styles.emptyTitle}>Create Your Style DNA</Text>
           <Text style={styles.emptyDescription}>
@@ -175,7 +175,10 @@ const StyleDNAScreen = ({ navigation }) => {
         {/* Personalized Tips */}
         {profile.personalized_tips && profile.personalized_tips.length > 0 && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>✨ Your Style Insights</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Ionicons name="sparkles" size={18} color="#FF9500" style={{ marginRight: 6 }} />
+              <Text style={styles.sectionTitle}>Your Style Insights</Text>
+            </View>
             {profile.personalized_tips.map((tip, index) => (
               <View key={index} style={styles.tipCard}>
                 <Ionicons name="bulb" size={20} color="#FF9500" />
@@ -187,7 +190,10 @@ const StyleDNAScreen = ({ navigation }) => {
 
         {/* Custom Preferences */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>✍️ Personal Styling Notes</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Ionicons name="create-outline" size={18} color="#007AFF" style={{ marginRight: 6 }} />
+            <Text style={styles.sectionTitle}>Personal Styling Notes</Text>
+          </View>
           <Text style={styles.sectionDescription}>
             Tell us about your style preferences, favorite pieces, or anything else we should know
           </Text>
@@ -217,7 +223,10 @@ const StyleDNAScreen = ({ navigation }) => {
         {/* Complexion Profile */}
         {profile.complexion_profile && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>🎨 Complexion Profile</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Ionicons name="color-palette-outline" size={18} color="#FF2D55" style={{ marginRight: 6 }} />
+              <Text style={styles.sectionTitle}>Complexion Profile</Text>
+            </View>
             <View style={styles.profileCard}>
               <View style={styles.profileRow}>
                 <Text style={styles.profileLabel}>Skin Tone</Text>
@@ -251,7 +260,10 @@ const StyleDNAScreen = ({ navigation }) => {
         {/* Body Profile */}
         {profile.body_profile && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>👤 Body Profile</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Ionicons name="person-outline" size={18} color="#5856D6" style={{ marginRight: 6 }} />
+              <Text style={styles.sectionTitle}>Body Profile</Text>
+            </View>
             <View style={styles.profileCard}>
               <View style={styles.profileRow}>
                 <Text style={styles.profileLabel}>Body Shape</Text>
@@ -272,7 +284,10 @@ const StyleDNAScreen = ({ navigation }) => {
         {/* Style Profile */}
         {profile.style_profile && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>🎯 Style Profile</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Ionicons name="flag-outline" size={18} color="#34C759" style={{ marginRight: 6 }} />
+              <Text style={styles.sectionTitle}>Style Profile</Text>
+            </View>
             <View style={styles.profileCard}>
               <View style={styles.profileRow}>
                 <Text style={styles.profileLabel}>Style</Text>

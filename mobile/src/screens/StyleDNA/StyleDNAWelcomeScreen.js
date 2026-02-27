@@ -24,7 +24,10 @@ export const StyleDNAWelcomeScreen = ({ navigation }) => {
         showsVerticalScrollIndicator={false}
       >
         {/* Title */}
-        <Text style={styles.title}>✨ Style DNA</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+          <Ionicons name="sparkles" size={24} color="#FF9500" style={{ marginRight: 8 }} />
+          <Text style={styles.title}>Style DNA</Text>
+        </View>
         <Text style={styles.subtitle}>
           Create your personalized style profile
         </Text>
@@ -32,7 +35,7 @@ export const StyleDNAWelcomeScreen = ({ navigation }) => {
         {/* Feature Cards */}
         <View style={styles.featureCard}>
           <View style={styles.iconCircle}>
-            <Text style={styles.iconEmoji}>👤</Text>
+            <Ionicons name="person" size={28} color="#007AFF" />
           </View>
           <Text style={styles.featureTitle}>Complexion Analysis</Text>
           <Text style={styles.featureDescription}>
@@ -42,7 +45,7 @@ export const StyleDNAWelcomeScreen = ({ navigation }) => {
 
         <View style={styles.featureCard}>
           <View style={styles.iconCircle}>
-            <Text style={styles.iconEmoji}>📏</Text>
+            <Ionicons name="resize-outline" size={28} color="#5856D6" />
           </View>
           <Text style={styles.featureTitle}>Body Shape Profile</Text>
           <Text style={styles.featureDescription}>
@@ -52,7 +55,7 @@ export const StyleDNAWelcomeScreen = ({ navigation }) => {
 
         <View style={styles.featureCard}>
           <View style={styles.iconCircle}>
-            <Text style={styles.iconEmoji}>🎨</Text>
+            <Ionicons name="color-palette-outline" size={28} color="#FF2D55" />
           </View>
           <Text style={styles.featureTitle}>Style Preferences</Text>
           <Text style={styles.featureDescription}>
@@ -84,9 +87,12 @@ export const StyleDNAWelcomeScreen = ({ navigation }) => {
         </View>
 
         {/* Privacy note */}
-        <Text style={styles.privacyText}>
-          🔒 Your photos are analyzed securely and never shared
-        </Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+          <Ionicons name="lock-closed" size={14} color="#8E8E93" style={{ marginRight: 4 }} />
+          <Text style={styles.privacyText}>
+            Your photos are analyzed securely and never shared
+          </Text>
+        </View>
       </ScrollView>
 
       {/* Bottom buttons */}
