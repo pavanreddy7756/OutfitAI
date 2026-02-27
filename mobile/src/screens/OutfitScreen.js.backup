@@ -1,0 +1,611 @@
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  ActivityIndicator,
+  TextInput,
+  Image,
+  ScrollView,
+} from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
+import { ApiService } from "../services/ApiService";
+import { AuthService } from "../services/AuthService";
+import { API_ENDPOINTS } from "../api/config";
+
+export function OutfitScreen() {
+  const [outfits, setOutfits] = useState([]);
+  const [clothing, setClothing] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [occasion, setOccasion] = useState("");
+  const [error, setError] = useState("");
+
+  useFocusEffect(
+    React.useCallback(() => {
+      loadOutfitsAndClothing();
+    }, [])
+  );
+
+  const loadOutfitsAndClothing = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const token = await AuthService.getToken();
+      console.log("[OutfitScreen] Token available:", token ? "YES" : "NO");
+      
+      if (!token) {
+        setError("Not authenticated. Please log in again.");
+        return;
+      }
+      
+      // Load outfits and clothing separately so one failure doesn't block the other
+      let outfitsData = [];
+      let clothingData = { items: [] };
+      
+      try {
+        outfitsData = await ApiService.getOutfits();
+      } catch (error) {
+        console.warn("[OutfitScreen] Error loading outfits:", error?.message);
+        // Continue without outfits - they're optional for generation
+      }
+      
+      try {
+        clothingData = await ApiService.getClothingItems();
+      } catch (error) {
+        console.error("[OutfitScreen] Critical: Error loading clothing items:", error);
+        setError("Failed to load clothing items");
+        setLoading(false);
+        return;
+      }
+      
+      // Extract items from responses - API returns objects with items/outfits properties
+      const outfitsList = Array.isArray(outfitsData) ? outfitsData : (outfitsData?.outfits || []);
+      const clothingList = Array.isArray(clothingData) ? clothingData : (clothingData?.items || []);
+      
+      console.log("[OutfitScreen] Loaded outfits:", outfitsList?.length || 0);
+      console.log("[OutfitScreen] Loaded clothing items:", clothingList?.length || 0);
+      setOutfits(outfitsList);
+      setClothing(clothingList);
+    } catch (error) {
+      console.error("Error loading outfits and clothing:", error);
+      setError(error?.message || "Failed to load data");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const generateOutfit = async () => {
+    if (!occasion) {
+      alert("Please enter an occasion");
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+    try {
+      console.log("[OutfitScreen] Generating outfit for occasion:", occasion);
+      console.log("[OutfitScreen] Clothing array:", clothing);
+      console.log("[OutfitScreen] Clothing length:", clothing?.length || 0);
+      
+      if (!clothing || clothing.length === 0) {
+        setError("No clothing items available. Please add some items first.");
+        setLoading(false);
+        return;
+      }
+      
+      const clothingIds = clothing.map(c => c.id);
+      const response = await ApiService.generateOutfit(occasion, clothingIds);
+      
+      console.log("[OutfitScreen] Outfit generated successfully");
+      console.log("[OutfitScreen] AI suggestions:", response.ai_suggestions);
+      
+      setOutfits([response, ...outfits]);
+      setOccasion("");
+    } catch (error) {
+      console.error("Error generating outfit:", error);
+      setError(error?.message || "Error generating outfit");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const toggleFavorite = async (id) => {
+    try {
+      const updatedOutfit = await ApiService.toggleFavorite(id);
+      setOutfits(
+        outfits.map((outfit) => (outfit.id === id ? updatedOutfit : outfit))
+      );
+    } catch (error) {
+      console.error("Error toggling favorite:", error);
+    }
+  };
+
+  const deleteOutfit = async (id) => {
+    try {
+      await ApiService.deleteOutfit(id);
+      setOutfits(outfits.filter((outfit) => outfit.id !== id));
+    } catch (error) {
+      console.error("Error deleting outfit:", error);
+    }
+  };
+
+  const parseAISuggestions = (aiSuggestionsStr) => {
+    try {
+      if (typeof aiSuggestionsStr !== 'string') {
+        return aiSuggestionsStr;
+      }
+
+      let cleanStr = aiSuggestionsStr.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+
+      try {
+        const parsed = JSON.parse(cleanStr);
+        if (Array.isArray(parsed)) return parsed;
+        return [parsed];
+      } catch (e) {
+        // Extract individual JSON objects using a more robust regex
+        const objectPattern = /\{[^{}]*?"outfit_name"\s*:\s*"[^"]*"[^{}]*?"styling_tips"\s*:\s*"[^"]*"[^{}]*?\}/gs;
+        const matches = cleanStr.match(objectPattern);
+        
+        if (matches && matches.length > 0) {
+          const parsed = matches.map(m => {
+            try {
+              return JSON.parse(m);
+            } catch {
+              return null;
+            }
+          }).filter(x => x !== null);
+          
+          if (parsed.length > 0) {
+            console.log(`[Parser] Extracted ${parsed.length} outfits`);
+            return parsed;
+          }
+        }
+
+        // Fallback: manually extract fields
+        const nameMatches = [...cleanStr.matchAll(/"outfit_name"\s*:\s*"([^"]*)"/g)];
+        const descMatches = [...cleanStr.matchAll(/"description"\s*:\s*"([^"]*)"/g)];
+        const idsMatches = [...cleanStr.matchAll(/"item_ids"\s*:\s*\[([^\]]*)\]/g)];
+        const tipsMatches = [...cleanStr.matchAll(/"styling_tips"\s*:\s*"([^"]*)"/g)];
+        
+        if (nameMatches.length > 0) {
+          return nameMatches.map((_, i) => ({
+            outfit_name: nameMatches[i]?.[1] || '',
+            description: descMatches[i]?.[1] || '',
+            item_ids: idsMatches[i]?.[1]?.split(',').map(x => parseInt(x.trim())).filter(x => !isNaN(x)) || [],
+            styling_tips: tipsMatches[i]?.[1] || ''
+          }));
+        }
+
+        return null;
+      }
+    } catch (error) {
+      console.error("Error parsing AI suggestions:", error);
+      return null;
+    }
+  };
+
+  const getMatchingClothingItems = (outfit, clothingList) => {
+    if (!outfit) return [];
+    
+    const suggestions = parseAISuggestions(outfit.ai_suggestions);
+    const itemIds = new Set();
+
+    if (Array.isArray(suggestions)) {
+      suggestions.forEach(s => {
+        if (s && s.item_ids && Array.isArray(s.item_ids)) {
+          s.item_ids.forEach(id => itemIds.add(id));
+        }
+      });
+    } else if (suggestions && suggestions.item_ids && Array.isArray(suggestions.item_ids)) {
+      suggestions.item_ids.forEach(id => itemIds.add(id));
+    }
+
+    // Extract API base URL
+    const API_BASE = "http://192.168.1.9:8000";
+
+    return Array.from(itemIds)
+      .map(id => clothingList.find(c => c.id === id))
+      .filter(item => item && item.image_path)
+      .map(item => ({
+        ...item,
+        // Convert relative path to full URL
+        image_path: item.image_path.startsWith('http') 
+          ? item.image_path 
+          : `${API_BASE}${item.image_path}`
+      }));
+  };
+
+  const formatSuggestionsText = (aiSuggestionsStr) => {
+    const suggestions = parseAISuggestions(aiSuggestionsStr);
+    
+    if (!suggestions) return aiSuggestionsStr;
+
+    if (Array.isArray(suggestions)) {
+      return suggestions
+        .map((s, idx) => {
+          const tips = s.styling_tips || '';
+          return `${idx + 1}. ${s.outfit_name || 'Outfit'}\n${s.description || ''}\n\n💡 ${tips}`;
+        })
+        .join('\n\n---\n\n');
+    } else if (suggestions) {
+      const tips = suggestions.styling_tips || '';
+      return `${suggestions.outfit_name || 'Outfit'}\n${suggestions.description || ''}\n\n💡 ${tips}`;
+    }
+    
+    return aiSuggestionsStr;
+  };
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>Outfit Suggestions</Text>
+      </View>
+
+      <View style={styles.generateSection}>
+        <Text style={styles.sectionTitle}>Create New Outfit</Text>
+        
+        <TextInput
+          style={styles.input}
+          placeholder="Occasion (e.g., casual, formal, date night)"
+          value={occasion}
+          onChangeText={setOccasion}
+          editable={!loading}
+          placeholderTextColor="#999"
+        />
+        <TouchableOpacity
+          style={[styles.generateButton, loading && styles.buttonDisabled]}
+          onPress={generateOutfit}
+          disabled={loading || clothing.length === 0}
+        >
+          {loading ? (
+            <ActivityIndicator color="#fff" />
+          ) : (
+            <Text style={styles.generateButtonText}>
+              Generate Outfit ({clothing.length} items available)
+            </Text>
+          )}
+        </TouchableOpacity>
+        
+        {clothing.length === 0 && (
+          <Text style={styles.warningText}>⚠️ Add clothing items first to generate outfits</Text>
+        )}
+      </View>
+
+      {error ? (
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorText}>{error}</Text>
+          <TouchableOpacity
+            style={styles.retryButton}
+            onPress={loadOutfitsAndClothing}
+          >
+            <Text style={styles.retryButtonText}>Retry</Text>
+          </TouchableOpacity>
+        </View>
+      ) : null}
+
+      {loading && outfits.length === 0 ? (
+        <ActivityIndicator size="large" color="#007AFF" style={styles.loader} />
+      ) : (
+        <FlatList
+          data={outfits}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => {
+            const suggestions = parseAISuggestions(item.ai_suggestions);
+            
+            return (
+              <View style={styles.outfitCard}>
+                <View style={styles.outfitHeader}>
+                  <View>
+                    <Text style={styles.occasion}>{item.occasion}</Text>
+                    <Text style={styles.createdAt}>
+                      {new Date(item.created_at).toLocaleDateString()}
+                    </Text>
+                  </View>
+                  <TouchableOpacity onPress={() => toggleFavorite(item.id)}>
+                    <Text style={styles.favoriteIcon}>
+                      {item.favorite ? "★" : "☆"}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+
+                {Array.isArray(suggestions) && suggestions.length > 0 && (
+                  <View style={styles.combinationsContainer}>
+                    <ScrollView
+                      horizontal
+                      showsHorizontalScrollIndicator={false}
+                      style={styles.combinationsScroll}
+                    >
+                      {suggestions.map((suggestion, index) => {
+                        const itemIds = suggestion.item_ids || [];
+                        const topItems = itemIds
+                          .map(id => clothing.find(c => c.id === id))
+                          .filter(item => item && item.image_path && (item.category === 'shirt' || item.category === 't-shirt'));
+                        const bottomItems = itemIds
+                          .map(id => clothing.find(c => c.id === id))
+                          .filter(item => item && item.image_path && (item.category === 'pants' || item.category === 'skirt'));
+
+                        return (
+                          <View key={index} style={styles.combinationCard}>
+                            <Text style={styles.outfitName}>{suggestion.outfit_name}</Text>
+                            
+                            <View style={styles.outfitImagesContainer}>
+                              {topItems.length > 0 && topItems[0].image_path && (
+                                <Image
+                                  source={{ uri: `http://192.168.1.9:8000${topItems[0].image_path}` }}
+                                  style={styles.topImage}
+                                />
+                              )}
+                              <Text style={styles.plusSign}>+</Text>
+                              {bottomItems.length > 0 && bottomItems[0].image_path && (
+                                <Image
+                                  source={{ uri: `http://192.168.1.9:8000${bottomItems[0].image_path}` }}
+                                  style={styles.bottomImage}
+                                />
+                              )}
+                            </View>
+
+                            <Text style={styles.outfitDescription}>
+                              {suggestion.description}
+                            </Text>
+                            <Text style={styles.styleTips}>
+                              💡 {suggestion.styling_tips}
+                            </Text>
+                          </View>
+                        );
+                      })}
+                    </ScrollView>
+                  </View>
+                )}
+
+                <TouchableOpacity
+                  style={styles.deleteButton}
+                  onPress={() => deleteOutfit(item.id)}
+                >
+                  <Text style={styles.deleteText}>Delete</Text>
+                </TouchableOpacity>
+              </View>
+            );
+          }}
+          contentContainerStyle={styles.listContent}
+        />
+      )}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#f5f5f5",
+  },
+  header: {
+    padding: 20,
+    backgroundColor: "#fff",
+    borderBottomWidth: 1,
+    borderBottomColor: "#eee",
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#333",
+  },
+  generateSection: {
+    padding: 15,
+    backgroundColor: "#fff",
+    borderBottomWidth: 1,
+    borderBottomColor: "#eee",
+  },
+  sectionTitle: {
+    fontSize: 14,
+    fontWeight: "bold",
+    marginBottom: 10,
+    color: "#333",
+  },
+  input: {
+    backgroundColor: "#f0f0f0",
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: "#ddd",
+    fontSize: 14,
+    color: "#333",
+  },
+  generateButton: {
+    backgroundColor: "#007AFF",
+    borderRadius: 8,
+    padding: 12,
+    alignItems: "center",
+  },
+  generateButtonText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  buttonDisabled: {
+    opacity: 0.6,
+  },
+  warningText: {
+    color: "#ff9500",
+    fontSize: 12,
+    marginTop: 10,
+    fontStyle: "italic",
+  },
+  errorContainer: {
+    backgroundColor: "#ffebee",
+    padding: 12,
+    marginHorizontal: 10,
+    marginTop: 10,
+    borderRadius: 6,
+    borderLeftWidth: 4,
+    borderLeftColor: "#ff3b30",
+  },
+  errorText: {
+    color: "#c62828",
+    fontSize: 14,
+    marginBottom: 10,
+  },
+  retryButton: {
+    backgroundColor: "#007AFF",
+    paddingHorizontal: 15,
+    paddingVertical: 8,
+    borderRadius: 6,
+  },
+  retryButtonText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 14,
+  },
+  loader: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  listContent: {
+    padding: 10,
+  },
+  outfitCard: {
+    backgroundColor: "#fff",
+    marginBottom: 15,
+    borderRadius: 8,
+    overflow: "hidden",
+  },
+  outfitHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: "#eee",
+  },
+  occasion: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#333",
+  },
+  createdAt: {
+    fontSize: 12,
+    color: "#999",
+    marginTop: 4,
+  },
+  favoriteIcon: {
+    fontSize: 24,
+  },
+  combinationsContainer: {
+    paddingVertical: 15,
+    paddingHorizontal: 5,
+  },
+  combinationsScroll: {
+    paddingHorizontal: 10,
+  },
+  combinationCard: {
+    backgroundColor: "#f9f9f9",
+    borderRadius: 10,
+    padding: 12,
+    marginRight: 10,
+    width: 160,
+    borderWidth: 1,
+    borderColor: "#ddd",
+  },
+  outfitName: {
+    fontSize: 13,
+    fontWeight: "bold",
+    color: "#333",
+    marginBottom: 8,
+    textAlign: "center",
+  },
+  outfitImagesContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 8,
+  },
+  topImage: {
+    width: 45,
+    height: 60,
+    borderRadius: 4,
+    backgroundColor: "#f0f0f0",
+  },
+  plusSign: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#007AFF",
+    marginHorizontal: 6,
+  },
+  bottomImage: {
+    width: 45,
+    height: 60,
+    borderRadius: 4,
+    backgroundColor: "#f0f0f0",
+  },
+  outfitDescription: {
+    fontSize: 11,
+    color: "#555",
+    marginBottom: 6,
+    fontStyle: "italic",
+    lineHeight: 14,
+  },
+  styleTips: {
+    fontSize: 10,
+    color: "#666",
+    lineHeight: 13,
+  },
+  carouselContainer: {
+    paddingHorizontal: 15,
+    paddingTop: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: "#eee",
+  },
+  carouselTitle: {
+    fontSize: 12,
+    fontWeight: "bold",
+    color: "#666",
+    marginBottom: 8,
+  },
+  carousel: {
+    marginBottom: 15,
+  },
+  clothingItem: {
+    marginRight: 12,
+    alignItems: "center",
+  },
+  carouselImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 6,
+    backgroundColor: "#f0f0f0",
+  },
+  clothingLabel: {
+    fontSize: 11,
+    color: "#666",
+    marginTop: 6,
+    textAlign: "center",
+  },
+  suggestionsContainer: {
+    padding: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: "#eee",
+  },
+  suggestionsTitle: {
+    fontSize: 12,
+    fontWeight: "bold",
+    color: "#666",
+    marginBottom: 8,
+  },
+  suggestions: {
+    fontSize: 12,
+    color: "#555",
+    lineHeight: 18,
+  },
+  deleteButton: {
+    backgroundColor: "#ff3b30",
+    paddingVertical: 12,
+    alignItems: "center",
+  },
+  deleteText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 14,
+  },
+});
