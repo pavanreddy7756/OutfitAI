@@ -74,15 +74,6 @@ export const StyleDNABodyResultsScreen = ({ route, navigation }) => {
                 {analysis.body_shape || "Not detected"}
               </Text>
             </View>
-            {analysis.height_estimate && (
-              <>
-                <View style={styles.divider} />
-                <View style={styles.infoRow}>
-                  <Text style={styles.infoLabel}>Estimated Height</Text>
-                  <Text style={styles.infoValue}>{analysis.height_estimate} cm</Text>
-                </View>
-              </>
-            )}
           </View>
         </View>
 

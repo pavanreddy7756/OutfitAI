@@ -31,6 +31,7 @@ export function ClothingScreen() {
   const navigation = useNavigation();
   const [clothes, setClothes] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [processingPhotos, setProcessingPhotos] = useState(false);
   const [uploadingCount, setUploadingCount] = useState(0);
   const [error, setError] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("clothing");
@@ -73,7 +74,9 @@ export function ClothingScreen() {
       const response = await ApiService.getClothingItems();
 
       if (response.items && Array.isArray(response.items)) {
-        setClothes(response.items);
+        // Sort newest first so recently uploaded items stay at top
+        const sorted = [...response.items].sort((a, b) => b.id - a.id);
+        setClothes(sorted);
       } else {
         logger.warn("Response items is not an array:", response);
         setClothes([]);
@@ -163,22 +166,13 @@ export function ClothingScreen() {
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsMultipleSelection: true,
         allowsEditing: false,
-        quality: 0.8,
+        quality: 1,
+        exif: false,
       });
 
       if (!result.canceled && result.assets && result.assets.length > 0) {
-        const images = result.assets;
-        Alert.alert(
-          "Upload Images",
-          `Upload ${images.length} images?`,
-          [
-            { text: "Cancel", style: "cancel" },
-            {
-              text: "Upload",
-              onPress: () => uploadMultipleImages(images),
-            },
-          ]
-        );
+        // Skip confirmation — user already confirmed in the native picker
+        uploadMultipleImages(result.assets);
       }
     } catch (error) {
       logger.error("Error picking multiple images:", error);
@@ -206,30 +200,63 @@ export function ClothingScreen() {
     setUploadingCount(images.length);
     setError("");
 
+    // 1. OPTIMISTIC UI — show local thumbnails immediately
+    const placeholders = images.map((img, i) => ({
+      id: `uploading-${Date.now()}-${i}`,
+      image_path: img.uri,
+      _isLocal: true,
+      name: 'Uploading...',
+      category: selectedCategory === 'shoes' ? 'shoes' : selectedCategory === 'accessories' ? 'accessories' : 'clothing',
+    }));
+    setClothes(prev => [...placeholders, ...prev]);
+
+    // Let React paint the placeholders before starting heavy work
+    await new Promise(r => setTimeout(r, 100));
+
+    // 2. PARALLEL COMPRESSION — compress all images at once
+    const compressed = await Promise.all(
+      images.map(async (img) => {
+        try {
+          const uri = await compressImage(img.uri);
+          return { ...img, uri };
+        } catch {
+          return img;
+        }
+      })
+    );
+
+    // 3. PARALLEL UPLOADS (3 at a time) — don't reload after each one
     let successCount = 0;
     let failCount = 0;
+    const BATCH_SIZE = 3;
 
-    for (let i = 0; i < images.length; i++) {
-      try {
-        const compressedUri = await compressImage(images[i].uri);
-        await uploadImage({ ...images[i], uri: compressedUri });
-        successCount++;
-      } catch (error) {
-        logger.error(`Error uploading image ${i + 1}:`, error);
-        failCount++;
-      }
+    for (let i = 0; i < compressed.length; i += BATCH_SIZE) {
+      const batch = compressed.slice(i, i + BATCH_SIZE);
+      const results = await Promise.allSettled(
+        batch.map(async (image) => {
+          const formData = new FormData();
+          formData.append("file", {
+            uri: image.uri,
+            type: "image/jpeg",
+            name: image.uri.split("/").pop() || "photo.jpg",
+          });
+          return ApiService.uploadClothing(formData);
+        })
+      );
+      results.forEach(r => r.status === 'fulfilled' ? successCount++ : failCount++);
+      setUploadingCount(compressed.length - i - batch.length);
     }
 
+    // 4. SINGLE RELOAD at the end — replaces placeholders with real data
+    await loadClothes();
     setLoading(false);
     setUploadingCount(0);
 
     if (failCount > 0) {
       Alert.alert(
         "Upload Complete",
-        `${successCount} image${successCount !== 1 ? 's' : ''} uploaded successfully.\n${failCount} failed.`
+        `${successCount} uploaded, ${failCount} failed.`
       );
-    } else {
-      Alert.alert("Success", `All ${successCount} images uploaded!`);
     }
   };
 
@@ -244,25 +271,37 @@ export function ClothingScreen() {
 
       const response = await ApiService.uploadClothing(formData);
 
-      // Reload the clothes list after successful upload
       if (response.success) {
         await loadClothes();
       }
     } catch (error) {
       logger.error("Error uploading image:", error);
-      throw error; // Re-throw to be caught by uploadMultipleImages
+      throw error;
     }
   };
 
-  const deleteClothing = async (id) => {
-    try {
-      setError("");
-      await ApiService.deleteClothing(id);
-      setClothes(clothes.filter((item) => item.id !== id));
-    } catch (error) {
-      logger.error("Error deleting item:", error);
-      setError(error.message || "Failed to delete item");
-    }
+  const deleteClothing = (id) => {
+    Alert.alert(
+      "Remove Item",
+      "This will also remove it from any generated outfits.",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Remove",
+          style: "destructive",
+          onPress: async () => {
+            try {
+              setError("");
+              await ApiService.deleteClothing(id);
+              setClothes(clothes.filter((item) => item.id !== id));
+            } catch (error) {
+              logger.error("Error deleting item:", error);
+              setError(error.message || "Failed to delete item");
+            }
+          },
+        },
+      ]
+    );
   };
 
   const openImageViewer = (item) => {
@@ -500,13 +539,8 @@ export function ClothingScreen() {
         <TouchableOpacity
           style={styles.uploadButton}
           onPress={pickImage}
-          disabled={loading}
         >
-          {loading ? (
-            <Text style={styles.uploadButtonText}>Uploading {uploadingCount}...</Text>
-          ) : (
-            <Text style={styles.uploadButtonText}>+ Add</Text>
-          )}
+          <Text style={styles.uploadButtonText}>+ Add</Text>
         </TouchableOpacity>
       </View>
 
@@ -573,12 +607,17 @@ export function ClothingScreen() {
             <View style={styles.itemContainer}>
               <TouchableOpacity
                 activeOpacity={0.9}
-                onPress={() => openImageViewer(item)}
+                onPress={() => !item._isLocal && openImageViewer(item)}
               >
                 <Image
-                  source={{ uri: `${API_BASE_URL}${item.image_path}` }}
-                  style={styles.itemImage}
+                  source={{ uri: item._isLocal ? item.image_path : `${API_BASE_URL}${item.image_path}` }}
+                  style={[styles.itemImage, item._isLocal && { opacity: 0.5 }]}
                 />
+                {item._isLocal && (
+                  <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, alignItems: 'center', justifyContent: 'center' }}>
+                    <ActivityIndicator color="#FFFFFF" />
+                  </View>
+                )}
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.deleteButton}

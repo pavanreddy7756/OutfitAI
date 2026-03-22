@@ -5,7 +5,7 @@ import shutil
 import os
 from datetime import datetime
 from app.database import get_db
-from app.models.clothing import ClothingItem
+from app.models.clothing import ClothingItem, OutfitItem
 from app.services.ai_service import analyze_clothing_image
 from app.utils.auth import get_user_id_from_token
 from app.core.constants import DEFAULT_PAGE_SIZE, MAX_PAGE_SIZE
@@ -219,6 +219,9 @@ async def delete_clothing_item(
         file_path = item.image_path.lstrip("/")
         if os.path.exists(file_path):
             os.remove(file_path)
+    
+    # Clean up outfit references to this item
+    db.query(OutfitItem).filter(OutfitItem.clothing_item_id == item_id).delete()
     
     db.delete(item)
     db.commit()

@@ -148,7 +148,7 @@ export const BiometricService = {
    */
   async validateToken(token) {
     try {
-      const response = await fetch("http://192.168.1.9:8000/api/clothing/items", {
+      const response = await fetch("http://192.168.0.6:8000/api/clothing/items", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,

@@ -96,6 +96,9 @@ export const FavoritesScreen = () => {
       .map(id => clothing.find(c => c.id === id))
       .filter(clothingItem => clothingItem && clothingItem.image_path);
 
+    // Skip if any items were deleted from wardrobe
+    if (outfitItems.length === 0 || outfitItems.length < itemIds.length) return null;
+
     return (
       <View style={styles.favoriteCard}>
         <View style={styles.cardHeader}>

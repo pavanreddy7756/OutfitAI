@@ -78,12 +78,12 @@ export function OutfitScreen() {
   const [isGeneratingFromChip, setIsGeneratingFromChip] = useState(false);
 
   const OCCASIONS = [
-    { id: 'work', label: 'Work', icon: 'briefcase-outline' },
-    { id: 'casual', label: 'Casual', icon: 'shirt-outline' },
-    { id: 'date', label: 'Date', icon: 'wine-outline' },
-    { id: 'formal', label: 'Formal', icon: 'diamond-outline' },
-    { id: 'active', label: 'Active', icon: 'fitness-outline' },
-    { id: 'party', label: 'Party', icon: 'sparkles-outline' },
+    { id: 'work', label: 'Work', icon: 'briefcase-outline', color: '#007AFF', bg: 'rgba(0,122,255,0.10)' },
+    { id: 'casual', label: 'Casual', icon: 'shirt-outline', color: '#34C759', bg: 'rgba(52,199,89,0.10)' },
+    { id: 'date', label: 'Date', icon: 'wine-outline', color: '#FF2D55', bg: 'rgba(255,45,85,0.10)' },
+    { id: 'formal', label: 'Formal', icon: 'diamond-outline', color: '#AF52DE', bg: 'rgba(175,82,222,0.10)' },
+    { id: 'active', label: 'Active', icon: 'fitness-outline', color: '#FF9500', bg: 'rgba(255,149,0,0.10)' },
+    { id: 'party', label: 'Party', icon: 'sparkles-outline', color: '#FF375F', bg: 'rgba(255,55,95,0.10)' },
   ];
 
   useFocusEffect(
@@ -338,102 +338,125 @@ export function OutfitScreen() {
 
   return (
     <View style={styles.container}>
-      {/* Hero Header with Occasion Chips */}
-      <View style={styles.heroHeader}>
-        <Text style={styles.heroTitle}>Outfits</Text>
-        
-        {/* Custom Input (always visible) */}
-        <View style={styles.customInputContainer}>
-          <TextInput
-            style={styles.customInput}
-            placeholder="Dinner, meeting, weekend..."
-            value={occasion}
-            onChangeText={setOccasion}
-            editable={!loading}
-            placeholderTextColor="#8E8E93"
-            autoCapitalize="sentences"
-          />
-          <TouchableOpacity
-            style={[styles.customButton, (!occasion || loading) && styles.customButtonDisabled]}
-            onPress={generateOutfit}
-            disabled={!occasion || loading}
-          >
-            {loading && !isGeneratingFromChip ? (
-              <ActivityIndicator color="#FFFFFF" size="small" />
-            ) : (
-              <Ionicons name="arrow-up" size={18} color="#FFFFFF" />
-            )}
-          </TouchableOpacity>
-        </View>
+      <FlatList
+        data={outfits}
+        keyExtractor={(item) => item.id.toString()}
+        contentContainerStyle={styles.outfitsList}
+        showsVerticalScrollIndicator={false}
+        ListHeaderComponent={
+          <View>
+            {/* Title */}
+            <Text style={styles.heroTitle}>Outfits</Text>
 
-        {/* Divider text */}
-        <Text style={styles.orText}>or quick select</Text>
+            {/* Search-style Input */}
+            <View style={styles.searchBar}>
+              <Ionicons name="search" size={16} color="#8E8E93" style={styles.searchIcon} />
+              <TextInput
+                style={styles.searchInput}
+                placeholder={'Try "date night" or "job interview"'}
+                value={occasion}
+                onChangeText={setOccasion}
+                editable={!loading}
+                placeholderTextColor="#C7C7CC"
+                autoCapitalize="sentences"
+                returnKeyType="go"
+                onSubmitEditing={generateOutfit}
+              />
+              {occasion ? (
+                <TouchableOpacity
+                  style={[styles.sendBtn, loading && { opacity: 0.4 }]}
+                  onPress={generateOutfit}
+                  disabled={!occasion || loading}
+                >
+                  {loading && !isGeneratingFromChip ? (
+                    <ActivityIndicator color="#FFFFFF" size="small" />
+                  ) : (
+                    <Ionicons name="arrow-up" size={16} color="#FFFFFF" />
+                  )}
+                </TouchableOpacity>
+              ) : null}
+            </View>
 
-        {/* Occasion Chips */}
-        <ScrollView 
-          horizontal 
-          showsHorizontalScrollIndicator={false}
-          style={styles.chipsScroll}
-          contentContainerStyle={styles.chipsContainer}
-        >
-          {OCCASIONS.map((occ) => (
-            <TouchableOpacity
-              key={occ.id}
-              style={[
-                styles.occasionChip,
-                selectedOccasion === occ.id && styles.occasionChipSelected,
-                selectedOccasion === occ.id && loading && styles.occasionChipLoading,
-              ]}
-              onPress={() => handleOccasionSelect(occ.id)}
-              disabled={loading}
+            {/* Occasion Chips */}
+            <ScrollView 
+              horizontal 
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.chipsContainer}
+              style={styles.chipsScroll}
             >
-              {selectedOccasion === occ.id && loading ? (
-                <ActivityIndicator size="small" color="#007AFF" />
-              ) : (
-                <>
-                  <Ionicons name={occ.icon} size={16} color={selectedOccasion === occ.id ? '#007AFF' : '#3C3C43'} />
-                  <Text style={[styles.chipLabel, selectedOccasion === occ.id && styles.chipLabelSelected]}>{occ.label}</Text>
-                </>
-              )}
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-        
-        {clothing.length === 0 && (
-          <View style={styles.warningBanner}>
-            <Ionicons name="alert-circle" size={16} color="#FF9500" style={{ marginRight: 6 }} />
-            <Text style={styles.warningText}>Add items to your wardrobe first</Text>
+              {OCCASIONS.map((occ) => {
+                const active = selectedOccasion === occ.id;
+                return (
+                  <TouchableOpacity
+                    key={occ.id}
+                    style={[
+                      styles.occasionChip,
+                      { backgroundColor: occ.bg },
+                      active && { borderColor: occ.color, borderWidth: 1.5 },
+                    ]}
+                    onPress={() => handleOccasionSelect(occ.id)}
+                    disabled={loading}
+                    activeOpacity={0.7}
+                  >
+                    {active && loading ? (
+                      <ActivityIndicator size="small" color={occ.color} />
+                    ) : (
+                      <>
+                        <Ionicons name={occ.icon} size={15} color={occ.color} />
+                        <Text style={[styles.chipLabel, { color: occ.color }]}>{occ.label}</Text>
+                      </>
+                    )}
+                  </TouchableOpacity>
+                );
+              })}
+            </ScrollView>
+            
+            {clothing.length === 0 && (
+              <View style={styles.warningBanner}>
+                <Ionicons name="information-circle" size={16} color="#FF9500" />
+                <Text style={styles.warningText}>Add items to your wardrobe to start styling</Text>
+              </View>
+            )}
+
+            {error ? (
+              <View style={styles.errorBanner}>
+                <Text style={styles.errorText}>{error}</Text>
+                <TouchableOpacity style={styles.errorRetry} onPress={loadOutfitsAndClothing}>
+                  <Text style={styles.errorRetryText}>Retry</Text>
+                </TouchableOpacity>
+              </View>
+            ) : null}
+
+            {loading && outfits.length === 0 && (
+              <View style={styles.loadingState}>
+                <ActivityIndicator size="large" color="#007AFF" />
+                <Text style={styles.loadingText}>Styling your look...</Text>
+              </View>
+            )}
           </View>
-        )}
-      </View>
-
-      {error ? (
-        <View style={styles.errorBanner}>
-          <Text style={styles.errorText}>{error}</Text>
-          <TouchableOpacity style={styles.errorRetry} onPress={loadOutfitsAndClothing}>
-            <Text style={styles.errorRetryText}>Retry</Text>
-          </TouchableOpacity>
-        </View>
-      ) : null}
-
-      {loading && outfits.length === 0 ? (
-        <View style={styles.loadingState}>
-          <ActivityIndicator size="large" color="#007AFF" />
-          <Text style={styles.loadingText}>Creating your perfect look...</Text>
-        </View>
-      ) : outfits.length === 0 ? (
-        <View style={styles.emptyState}>
-          <Text style={styles.emptyTitle}>No Outfits Yet</Text>
-          <Text style={styles.emptySubtitle}>Select an occasion above to get started</Text>
-        </View>
-      ) : (
-        <FlatList
-          data={outfits}
-          keyExtractor={(item) => item.id.toString()}
-          contentContainerStyle={styles.outfitsList}
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item }) => {
+        }
+        ListEmptyComponent={
+          !loading ? (
+            <View style={styles.emptyState}>
+              <View style={styles.emptyCircle}>
+                <Ionicons name="sparkles" size={28} color="#AEAEB2" />
+              </View>
+              <Text style={styles.emptyTitle}>Your looks start here</Text>
+              <Text style={styles.emptySubtitle}>Choose an occasion or type one in{'\n'}to style your first outfit</Text>
+            </View>
+          ) : null
+        }
+        renderItem={({ item, index }) => {
             const suggestions = parseAISuggestions(item.ai_suggestions);
+            
+            // Check if any suggestions still have all items present
+            const hasValidSuggestions = Array.isArray(suggestions) && suggestions.some(s => {
+              const ids = s.item_ids || [];
+              const found = ids.filter(id => clothing.find(c => c.id === id));
+              return found.length === ids.length && ids.length > 0;
+            });
+            
+            if (!hasValidSuggestions) return null;
             
             return (
               <View style={styles.outfitSection}>
@@ -446,6 +469,7 @@ export function OutfitScreen() {
                         month: 'short', 
                         day: 'numeric' 
                       })}
+                      {Array.isArray(suggestions) ? `  ·  ${suggestions.length} look${suggestions.length !== 1 ? 's' : ''}` : ''}
                     </Text>
                   </View>
                   <View style={styles.sectionActions}>
@@ -457,25 +481,25 @@ export function OutfitScreen() {
                       {regeneratingId === item.id ? (
                         <ActivityIndicator size="small" color="#007AFF" />
                       ) : (
-                        <Text style={styles.actionIconRegenerate}>↻</Text>
+                        <Ionicons name="refresh" size={18} color="#007AFF" />
                       )}
                     </TouchableOpacity>
                     <TouchableOpacity
                       onPress={() => deleteOutfit(item.id)}
                       style={styles.actionButton}
                     >
-                      <Text style={styles.actionIconDelete}>×</Text>
+                      <Ionicons name="trash-outline" size={17} color="#FF3B30" />
                     </TouchableOpacity>
                   </View>
                 </View>
 
-                {/* Outfit Cards Carousel */}
+                {/* Outfit Cards Carousel — KEEPING EXISTING CARD DESIGN */}
                 {Array.isArray(suggestions) && suggestions.length > 0 && (
                   <ScrollView
                     horizontal
                     showsHorizontalScrollIndicator={false}
                     contentContainerStyle={styles.carouselContent}
-                    snapToInterval={300}
+                    snapToInterval={296}
                     decelerationRate="fast"
                   >
                     {suggestions.map((suggestion, index) => {
@@ -484,18 +508,17 @@ export function OutfitScreen() {
                         .map(id => clothing.find(c => c.id === id))
                         .filter(item => item && item.image_path);
                       
-                      // Use smart ordering to prioritize jackets
+                      // Skip this card if any items are missing (deleted from wardrobe)
+                      if (allOutfitItems.length === 0 || allOutfitItems.length < itemIds.length) return null;
+                      
                       const outfitItems = smartOrderItems(allOutfitItems);
                       
-                      // Check if favorited by comparing item_ids arrays
                       const isFavorite = favorites.some(fav => {
                         try {
                           const favCombination = JSON.parse(fav.combination_data);
                           const favItemIds = favCombination.item_ids || [];
-                          // Compare sorted arrays to handle order differences
                           return JSON.stringify(favItemIds.sort()) === JSON.stringify(itemIds.sort());
                         } catch (e) {
-                          logger.error("Error parsing favorite combination:", e);
                           return false;
                         }
                       });
@@ -562,8 +585,7 @@ export function OutfitScreen() {
               </View>
             );
           }}
-        />
-      )}
+      />
     </View>
   );
 }
@@ -573,64 +595,51 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F2F2F7',
   },
-  heroHeader: {
-    paddingTop: 32,
-    paddingHorizontal: 24,
-    paddingBottom: 20,
-    backgroundColor: '#FFFFFF',
-  },
+  // ── Title ──
   heroTitle: {
     fontSize: 34,
     fontWeight: '700',
     color: '#000000',
-    letterSpacing: 0.4,
-    marginBottom: 20,
+    letterSpacing: 0.37,
+    marginHorizontal: 16,
+    marginBottom: 16,
   },
-  customInputContainer: {
+  // ── Search Bar (iOS native style) ──
+  searchBar: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 12,
-    marginBottom: 12,
+    backgroundColor: 'rgba(118,118,128,0.12)',
+    borderRadius: 10,
+    marginHorizontal: 16,
+    marginBottom: 16,
+    height: 36,
   },
-  customInput: {
+  searchIcon: {
+    marginLeft: 8,
+    marginRight: 4,
+  },
+  searchInput: {
     flex: 1,
     fontSize: 17,
-    fontWeight: '400',
     color: '#000000',
-    backgroundColor: '#F2F2F7',
-    borderRadius: 12,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
+    paddingVertical: 0,
+    height: 36,
   },
-  customButton: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+  sendBtn: {
+    width: 28,
+    height: 28,
+    borderRadius: 14,
     backgroundColor: '#007AFF',
     alignItems: 'center',
     justifyContent: 'center',
+    marginRight: 4,
   },
-  customButtonDisabled: {
-    backgroundColor: '#C7C7CC',
-  },
-  customButtonIcon: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: '#FFFFFF',
-  },
-  orText: {
-    fontSize: 13,
-    fontWeight: '500',
-    color: '#8E8E93',
-    textAlign: 'center',
-    marginBottom: 12,
-  },
+  // ── Occasion Chips ──
   chipsScroll: {
-    marginHorizontal: -24,
-    paddingHorizontal: 24,
+    marginBottom: 16,
   },
   chipsContainer: {
-    paddingRight: 24,
+    paddingHorizontal: 16,
     gap: 8,
   },
   occasionChip: {
@@ -638,52 +647,36 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 14,
     paddingVertical: 8,
-    borderRadius: 18,
-    backgroundColor: '#F2F2F7',
-    gap: 6,
-    marginRight: 8,
-    minWidth: 60,
-    justifyContent: 'center',
-  },
-  occasionChipSelected: {
-    backgroundColor: 'rgba(0, 122, 255, 0.12)',
-  },
-  occasionChipLoading: {
-    backgroundColor: '#F2F2F7',
-  },
-  chipEmoji: {
-    fontSize: 16,
+    borderRadius: 20,
+    gap: 5,
+    borderWidth: 1.5,
+    borderColor: 'transparent',
   },
   chipLabel: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#3C3C43',
-    letterSpacing: -0.1,
+    letterSpacing: -0.2,
   },
-  chipLabelSelected: {
-    color: '#007AFF',
-  },
+  // ── Warning ──
   warningBanner: {
-    marginTop: 12,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
-    paddingVertical: 8,
-  },
-  warningIcon: {
-    fontSize: 16,
+    gap: 6,
+    marginHorizontal: 16,
+    marginTop: 4,
+    marginBottom: 4,
   },
   warningText: {
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '400',
     color: '#FF9500',
-    flex: 1,
   },
+  // ── Error ──
   errorBanner: {
-    backgroundColor: '#FFEBEE',
+    backgroundColor: 'rgba(255,59,48,0.08)',
     marginHorizontal: 16,
-    marginVertical: 8,
-    padding: 16,
+    marginBottom: 8,
+    padding: 14,
     borderRadius: 12,
     flexDirection: 'row',
     alignItems: 'center',
@@ -692,120 +685,109 @@ const styles = StyleSheet.create({
   errorText: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#C62828',
+    color: '#FF3B30',
     flex: 1,
   },
   errorRetry: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    backgroundColor: '#C62828',
+    paddingHorizontal: 14,
+    paddingVertical: 6,
+    backgroundColor: '#FF3B30',
     borderRadius: 8,
+    marginLeft: 12,
   },
   errorRetryText: {
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '600',
     color: '#FFFFFF',
   },
+  // ── Loading ──
   loadingState: {
-    flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
     paddingTop: 80,
   },
   loadingText: {
-    fontSize: 17,
+    fontSize: 15,
     fontWeight: '500',
     color: '#8E8E93',
-    marginTop: 20,
+    marginTop: 16,
   },
+  // ── Empty State ──
   emptyState: {
-    flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 40,
-    paddingBottom: 120,
+    paddingTop: 60,
+    paddingHorizontal: 44,
   },
-  emptyIcon: {
-    fontSize: 72,
-    marginBottom: 20,
+  emptyCircle: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    backgroundColor: 'rgba(118,118,128,0.08)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 16,
   },
   emptyTitle: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: '600',
     color: '#000000',
-    marginBottom: 8,
+    marginBottom: 6,
   },
   emptySubtitle: {
-    fontSize: 17,
+    fontSize: 15,
     fontWeight: '400',
     color: '#8E8E93',
-    lineHeight: 24,
+    textAlign: 'center',
+    lineHeight: 21,
   },
+  // ── Outfit List ──
   outfitsList: {
-    paddingHorizontal: 16,
     paddingTop: 24,
     paddingBottom: 100,
   },
-  recentHeader: {
-    paddingHorizontal: 4,
-    paddingTop: 8,
-    paddingBottom: 12,
-  },
-  recentTitle: {
-    fontSize: 22,
-    fontWeight: '700',
-    color: '#000000',
-    letterSpacing: 0.35,
-  },
+  // ── Section ──
   outfitSection: {
-    marginBottom: 32,
+    marginTop: 40,
   },
   sectionHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 16,
-    paddingHorizontal: 4,
+    paddingHorizontal: 16,
   },
   sectionHeaderLeft: {
     flex: 1,
   },
   sectionOccasion: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: '700',
     color: '#000000',
-    letterSpacing: 0.35,
-    marginBottom: 4,
+    letterSpacing: 0.38,
+    textTransform: 'capitalize',
   },
   sectionDate: {
-    fontSize: 15,
+    fontSize: 13,
     fontWeight: '400',
     color: '#8E8E93',
+    marginTop: 1,
   },
   sectionActions: {
     flexDirection: 'row',
-    gap: 8,
+    gap: 6,
   },
   actionButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#F2F2F7',
+    width: 34,
+    height: 34,
+    borderRadius: 17,
+    backgroundColor: 'rgba(118,118,128,0.08)',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  actionIconDelete: {
-    fontSize: 32,
-    fontWeight: '300',
-    color: '#8E8E93',
-  },
-  actionIconRegenerate: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: '#007AFF',
-  },
+  // ── Cards (PRESERVED) ──
   carouselContent: {
-    paddingRight: 16,
+    paddingLeft: 16,
+    paddingRight: 8,
+    paddingBottom: 8,
   },
   outfitCard: {
     width: 280,
@@ -876,14 +858,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '700',
     color: '#000000',
-    letterSpacing: 0.35,
+    letterSpacing: -0.4,
   },
   outfitDesc: {
     fontSize: 15,
     fontWeight: '400',
     color: '#3C3C43',
-    lineHeight: 21,
-    marginBottom: 8,
+    lineHeight: 20,
   },
   moreItemsHint: {
     fontSize: 13,

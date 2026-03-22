@@ -2,7 +2,7 @@
 // Use your machine's IP address for the API endpoint
 // This allows both web and mobile devices to connect
 
-const API_BASE_URL = "http://192.168.1.4:8000";
+const API_BASE_URL = "http://192.168.0.6:8000";
 
 // Alternative URLs for different scenarios:
 // - Local development (iOS simulator): "http://localhost:8000"
